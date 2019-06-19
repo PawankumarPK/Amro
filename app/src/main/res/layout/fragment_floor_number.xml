@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DDFFFFFF"
+    tools:context=".fragments.FloorsFragment">
+
+    <Button
+        android:id="@+id/mCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/grey_gradients"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Cancel Delivery"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="15sp" />
+
+    <GridLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:useDefaultMargins="true"
+        android:layout_centerInParent="true">
+
+    </GridLayout>
+
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="10"
+    android:background="#fff"
+    android:orientation="vertical">
+
+
+    <ProgressBar
+        android:id="@+id/mProgress"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:theme="@style/BlueAccent"
+        android:layout_weight="5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa_light"
+        android:gravity="center_horizontal"
+        android:text="Wait a moment..."
+        android:textColor="#498FB0"
+        android:textSize="40sp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mPassCodeRelative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DDFFFFFF"
+    tools:context=".fragments.PassCodeFragment">
+
+    <include
+        android:id="@+id/mProgressLayout"
+        layout="@layout/progress_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/mLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/mEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:hint="Enter Passcode"
+            android:inputType="numberPassword"
+            android:textSize="25sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical">
+
+            <Button
+                android:id="@+id/mOne"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="1"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mTwo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="2"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mThree"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="3"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/mFour"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="4"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mFive"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="5"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mSix"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="6"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/mSeven"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="7"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mEight"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="8"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mNine"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="9"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/mClear"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="Clear"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mZero"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="0"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/mDone"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_gradient"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="Done"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/mCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_close" />
+
+
+</RelativeLayout>

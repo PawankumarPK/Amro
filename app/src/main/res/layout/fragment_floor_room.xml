@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DDFFFFFF"
+    tools:context=".fragments.RoomsFragment">
+
+    <ImageView
+        android:id="@+id/mCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_close" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/mFloor"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_gradient"
+            android:fontFamily="@font/comfortaa_bold"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="#fff"
+            android:textSize="70sp" />
+
+
+        <GridLayout
+            android:id="@+id/roomBtnContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mFloor"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:useDefaultMargins="true"
+            android:rowCount="1"
+            android:layout_centerInParent="true">
+
+        </GridLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

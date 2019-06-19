@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Alphabets">
+        <!--item>Neuroplex</item>
+        <item>Acyclovir</item>
+        <item>Alendronate</item>
+        <item>Bosentan </item>
+        <item>Calcium </item>
+        <item>Dapsone </item>
+        <item>Didanosine </item>
+        <item>Eltrombopag </item>
+        <item>Emicizumab </item>
+        <item>Famciclovir </item>
+        <item>Foscarnet </item>
+        <item>Gefitinib </item>
+        <item>Hydralazine </item>
+        <item>Hydroxyurea </item>
+        <item>Imatinib </item>
+        <item>Labetalol </item>
+        <item>Lorazepam </item>
+        <item>Melphalan </item>
+        <item>Mesna </item>
+        <item>Omeprazole </item>
+        <item>Omeprazole </item>
+        <item>Penicillin VK</item>
+        <item>Phenytoin </item>
+        <item>Ranitidine </item>
+        <item>Rituximab </item>
+        <item>Thiotepa </item-->
+    </string-array>
+</resources>

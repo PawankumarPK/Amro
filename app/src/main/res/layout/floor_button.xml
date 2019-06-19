@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button
+    android:id="@+id/mRoomNumBtn"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
+    android:background="@drawable/button_gradient"
+    android:fontFamily="@font/comfortaa_bold"
+    android:gravity="center"
+    android:text="1"
+    android:textColor="#fff"
+    android:textSize="40sp" />
