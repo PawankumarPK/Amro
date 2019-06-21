@@ -1,4 +1,4 @@
-package ai.jetbrain.sar.api.UserModels
+package com.example.amro.api.UserModels
 
 import com.google.gson.annotations.SerializedName
 

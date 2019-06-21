@@ -1,14 +1,13 @@
 package com.example.amro.fragments
 
 
-import com.example.amro.R
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import com.example.amro.fragments.BaseFragment
+import com.example.amro.R
 import kotlinx.android.synthetic.main.confirmation_dialog.*
 import kotlinx.android.synthetic.main.fragment_cancel_and_continue.*
 
@@ -27,7 +26,7 @@ class CancelAndContinue : BaseFragment() {
 
         mDialog = Dialog(baseActivity)
         mCancelDelivery.setOnClickListener { confirmCancelNav() }
-        mContinue.setOnClickListener {  continueNav(destination) }
+        mContinue.setOnClickListener { continueNav(destination) }
     }
 
     private fun continueNav(des: String) {
@@ -53,7 +52,10 @@ class CancelAndContinue : BaseFragment() {
         mDialog.setContentView(layout)
         mDialog.mDone.setOnClickListener { cancelNav() }
         mDialog.mDiscard.setOnClickListener { mDialog.dismiss() }
-        mDialog.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        mDialog.window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+        )
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()
         mDialog.window.decorView.systemUiVisibility = baseActivity.window.decorView.systemUiVisibility

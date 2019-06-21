@@ -1,4 +1,4 @@
-package ai.jetbrain.sar.api.FloorRoomModels
+package com.example.amro.api.FloorRoomModels
 
 import com.google.gson.annotations.SerializedName
 

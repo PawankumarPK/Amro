@@ -1,4 +1,4 @@
-package ai.jetbrain.sar.api
+package com.example.amro.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

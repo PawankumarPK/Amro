@@ -1,9 +1,9 @@
 package com.example.amro.fragments
 
 import com.example.amro.R
-import ai.jetbrain.sar.api.FloorRoomModels.FloorListModel
-import ai.jetbrain.sar.api.FloorRoomModels.FloorModel
-import ai.jetbrain.sar.api.RetrofitClient
+import com.example.amro.api.FloorRoomModels.FloorListModel
+import com.example.amro.api.FloorRoomModels.FloorModel
+import com.example.amro.api.RetrofitClient
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater

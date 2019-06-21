@@ -1,9 +1,10 @@
 package com.example.amro.fragments
 
 import com.example.amro.R
-import ai.jetbrain.sar.api.RetrofitClient
-import ai.jetbrain.sar.api.TripDetails
-import ai.jetbrain.sar.api.UserModels.UserModel
+import com.example.amro.api.RetrofitClient
+import com.example.amro.api.StandardModels.STATUS
+import com.example.amro.api.TripDetails
+import com.example.amro.api.UserModels.UserModel
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class PassCodeFragment : BaseFragment() {
 
     var number: Long = 0
     lateinit var mDialog: Dialog
+     lateinit var status : STATUS
 
     private fun updateNumber(digit: Int) {
         number = number * 10 + digit
@@ -74,6 +76,8 @@ class PassCodeFragment : BaseFragment() {
 
     private fun loadNext() {
         mProgressLayout.visibility = View.GONE
+        TripDetails.TripId.toString()
+        fragmentManager.beginTransaction().replace(R.id.mFrameContainer, InventoryFragment()).commit()
     }
 
     private fun onDone() {
@@ -105,7 +109,6 @@ class PassCodeFragment : BaseFragment() {
         })
 
         showProgressFragment()
-
         mEditText.text = ""
         number *= 0
 

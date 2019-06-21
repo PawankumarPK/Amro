@@ -2,9 +2,9 @@ package com.example.amro.fragments
 
 import com.example.amro.R
 import com.example.amro.adapter.ReceiveInventriesAdapter
-import ai.jetbrain.sar.api.RetrofitClient
-import ai.jetbrain.sar.api.StockModels.StockListModel
-import ai.jetbrain.sar.api.StockModels.StockModel
+import com.example.amro.api.RetrofitClient
+import com.example.amro.api.StockModels.StockListModel
+import com.example.amro.api.StockModels.StockModel
 import android.app.Dialog
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -45,11 +45,11 @@ class ReceiveInventries : BaseFragment() {
 
         call.enqueue(object : Callback<StockListModel> {
             override fun onFailure(call: Call<StockListModel>?, t: Throwable?) {
-                Toast.makeText(baseActivity,"Something went wrong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<StockListModel>, response: Response<StockListModel>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     itemList = response.body().medicineList!!
                     adapter = ReceiveInventriesAdapter(itemList)
                     mRecyclerView.adapter = adapter

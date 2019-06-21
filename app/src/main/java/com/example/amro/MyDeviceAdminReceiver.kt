@@ -1,4 +1,4 @@
-package ai.jetbrain.sar
+package com.example.amro
 
 import android.app.admin.DeviceAdminReceiver
 import android.content.ComponentName

@@ -1,5 +1,6 @@
 package com.example.amro.adapter
 
+import com.example.amro.api.StockModels.StockModel
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,9 @@ import com.example.amro.R
 import kotlinx.android.synthetic.main.view_holder.view.*
 
 
-class InventriesAdapter(private val list: ArrayList<String>) : RecyclerView.Adapter<InventriesAdapter.viewHolder>() {
+class InventriesAdapter(private val medListReciveInv: ArrayList<StockModel>) :
+    RecyclerView.Adapter<InventriesAdapter.viewHolder>() {
 
-    private var mCounter = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
 
@@ -19,19 +20,20 @@ class InventriesAdapter(private val list: ArrayList<String>) : RecyclerView.Adap
 
     override fun getItemCount(): Int {
 
-        return list.size
+        return medListReciveInv.size
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
 
-        holder.bindItems(list[position])
+        holder.bindItems(position)
     }
 
     inner class viewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bindItems(position: String) {
+        fun bindItems(position: Int) {
+            val medData = medListReciveInv[position]
 
-            itemView.mMedicineName.text = position
+            itemView.mMedicineName.text = medData.stockName
 
 
         }

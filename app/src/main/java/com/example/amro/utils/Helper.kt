@@ -1,4 +1,4 @@
-package ai.jetbrain.sar.utils
+package com.example.amro.utils
 
 /**
  * Created by ajayvishnu on 29/05/19.

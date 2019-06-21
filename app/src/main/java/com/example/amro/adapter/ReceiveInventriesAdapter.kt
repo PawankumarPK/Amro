@@ -1,6 +1,6 @@
 package com.example.amro.adapter
 
-import ai.jetbrain.sar.api.StockModels.StockModel
+import com.example.amro.api.StockModels.StockModel
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View

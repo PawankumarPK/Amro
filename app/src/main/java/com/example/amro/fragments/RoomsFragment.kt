@@ -2,8 +2,8 @@ package com.example.amro.fragments
 
 
 import com.example.amro.R
-import ai.jetbrain.sar.api.FloorRoomModels.FloorModel
-import ai.jetbrain.sar.api.FloorRoomModels.RoomModel
+import com.example.amro.api.FloorRoomModels.FloorModel
+import com.example.amro.api.FloorRoomModels.RoomModel
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,13 +12,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.GridLayout
 import com.example.amro.fragments.BaseFragment
+import com.example.amro.fragments.BreakFragment
 import kotlinx.android.synthetic.main.fragment_floor_room.*
 
 
 class RoomsFragment : BaseFragment() {
 
     private lateinit var mDialog: Dialog
-    private lateinit var floor:FloorModel
+    private lateinit var floor: FloorModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_floor_room, container, false)
@@ -52,7 +53,7 @@ class RoomsFragment : BaseFragment() {
         }
     }
 
-    fun setFloorData(floorData:FloorModel) {
+    fun setFloorData(floorData: FloorModel) {
         floor = floorData
     }
 
