@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.amro.fragments.BaseFragment
 import kotlinx.android.synthetic.main.fragment_receive_inventries.*
 import kotlinx.android.synthetic.main.thanku_dialog.*
 import retrofit2.Call

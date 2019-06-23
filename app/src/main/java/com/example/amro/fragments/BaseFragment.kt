@@ -1,8 +1,8 @@
 package com.example.amro.fragments
 
 import com.example.amro.activity.BaseActivity
-import android.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 
 open class BaseFragment : Fragment() {
 

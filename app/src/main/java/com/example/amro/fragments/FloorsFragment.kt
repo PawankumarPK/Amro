@@ -13,7 +13,6 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.GridLayout
 import android.widget.Toast
-import com.example.amro.fragments.BaseFragment
 import kotlinx.android.synthetic.main.fragment_floor_number.*
 import kotlinx.android.synthetic.main.sure_dialog.*
 import retrofit2.Call

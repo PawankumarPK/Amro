@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.amro.fragments.BaseFragment
-import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.fragment_key_passcode_second.*
 
 
@@ -28,8 +26,6 @@ class KeyPasscodeSecond : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        baseActivity.mToolbar.visibility = View.GONE
 
         val numButtons = arrayOf(mZero, mOne, mTwo, mThree, mFour,
                 mFive, mSix, mSeven, mEight, mNine)

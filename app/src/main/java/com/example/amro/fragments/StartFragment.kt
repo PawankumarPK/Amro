@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.amro.fragments.BaseFragment
-import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.fragment_start_delivery.*
 
 class StartFragment : BaseFragment() {
@@ -21,15 +19,12 @@ class StartFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        status = STATUS.READY
-
-        baseActivity.mToolbar.visibility = View.GONE
-
         mStartDelivery.setOnClickListener {
-            fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, PassCodeFragment()).commit()
+            //fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, PassCodeFragment()).commit()
         }
-        mSettings.setOnClickListener { fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, SettingsFragment()).commit()}
+        mSettings.setOnClickListener {
+            //fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, SettingsFragment()).commit()
+        }
     }
 
 

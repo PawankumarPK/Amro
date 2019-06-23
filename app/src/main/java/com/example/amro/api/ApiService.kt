@@ -1,12 +1,16 @@
 package com.example.amro.api
 
 import com.example.amro.api.FloorRoomModels.FloorListModel
+import com.example.amro.api.StockModels.StateModel
 import com.example.amro.api.StockModels.StockListModel
 import com.example.amro.api.UserModels.UserModel
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
+
+    @GET("/amro-state")
+    fun getState(): Call<StateModel>
 
     @GET("/amro-stock")
     fun getStockList(@Query("t") tripId:Int): Call<StockListModel>
@@ -17,5 +21,9 @@ interface ApiService {
     @POST("/delivery")
     @FormUrlEncoded
     fun checkPasscode(@Field("pin") pin:String): Call<UserModel>
+
+
+
+
 
 }

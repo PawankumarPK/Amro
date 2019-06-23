@@ -1,5 +1,6 @@
 package com.example.amro.api.FloorRoomModels
 
+import com.example.amro.api.FloorRoomModels.RoomModel
 import com.google.gson.annotations.SerializedName
 
 class FloorModel {

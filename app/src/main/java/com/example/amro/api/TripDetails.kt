@@ -11,4 +11,6 @@ object TripDetails {
 
     var UserName:String = ""
 
+    var TripState:Int = -1
+
 }

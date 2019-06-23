@@ -11,8 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.amro.fragments.BaseFragment
-import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.fragment_key_passcode.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,7 +36,6 @@ class PassCodeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        baseActivity.mToolbar.visibility = View.GONE
         mDialog = Dialog(baseActivity)
 
         val numBtns = arrayOf(mZero, mOne, mTwo, mThree, mFour,
@@ -77,7 +74,7 @@ class PassCodeFragment : BaseFragment() {
     private fun loadNext() {
         mProgressLayout.visibility = View.GONE
         TripDetails.TripId.toString()
-        fragmentManager.beginTransaction().replace(R.id.mFrameContainer, InventoryFragment()).commit()
+        fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, InventoryFragment()).commit()
     }
 
     private fun onDone() {
