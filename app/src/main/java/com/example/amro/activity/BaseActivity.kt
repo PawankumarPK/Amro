@@ -1,10 +1,5 @@
 package com.example.amro.activity
 
-import com.example.amro.MyStateReceiver
-import com.example.amro.StateManagerService
-import com.example.amro.api.RetrofitClient
-import com.example.amro.fragments.*
-import com.example.amro.utils.Helper
 import android.app.ListFragment
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
@@ -25,7 +20,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.example.amro.MyDeviceAdminReceiver
+import com.example.amro.MyStateReceiver
 import com.example.amro.R
+import com.example.amro.StateManagerService
+import com.example.amro.api.RetrofitClient
+import com.example.amro.fragments.*
+import com.example.amro.utils.Helper
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.fragment_pager_list.*
 
@@ -58,11 +58,11 @@ class BaseActivity : AppCompatActivity() {
     }
 
     class LayoutFragment : ListFragment() {
-        internal var mNum: Int = 0
+        private var mNum: Int = 0
 
         override fun onCreate(savedInstanceState: Bundle) {
             super.onCreate(savedInstanceState)
-            mNum = if (getArguments() != null) getArguments().getInt("num") else 1
+            mNum = if (getArguments() != null) arguments.getInt("num") else 1
         }
 
         override fun onCreateView(
@@ -77,13 +77,11 @@ class BaseActivity : AppCompatActivity() {
         override fun onActivityCreated(savedInstanceState: Bundle) {
             super.onActivityCreated(savedInstanceState)
 
-            var a = ArrayList<String>()
+            val a = ArrayList<String>()
 
-            setListAdapter(
-                ArrayAdapter<String>(
-                    getActivity(),
-                    android.R.layout.simple_list_item_1, a
-                )
+            listAdapter = ArrayAdapter<String>(
+                activity,
+                android.R.layout.simple_list_item_1, a
             )
         }
 
@@ -136,7 +134,7 @@ class BaseActivity : AppCompatActivity() {
         //loadFragment()
 
         mAdapter = MyAdapter(supportFragmentManager)
-        pager.setAdapter(mAdapter)
+        pager.adapter = mAdapter
 
         val filter = IntentFilter("ai.jetbrain.RobotState")
         val receiver = MyStateReceiver()
