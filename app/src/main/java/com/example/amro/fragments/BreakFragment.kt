@@ -1,6 +1,7 @@
 package com.example.amro.fragments
 
 import com.example.amro.R
+import com.example.amro.api.models.FloorRoomModels.RoomModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import kotlinx.android.synthetic.main.fragment_break.*
 
 class BreakFragment : BaseFragment() {
 
+    var roomName = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_break, container, false)
@@ -16,23 +19,24 @@ class BreakFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //mData.text = this.arguments!!.getString("destination")
         //mBreak.setOnClickListener { breakOn() }
-        //mDelivery.setOnClickListener { tempClick() } // to be removed
     }
 
-    private fun tempClick() {
-        val inv = ReceiveInventries()
-        //inv.setTalkerListener(myTalker, myListener)
-        //fragmentManager!!.beginTransaction().addToBackStack(null).replace(R.id.mFrameContainer, inv).commit()
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            mData.text = roomName
+        }
     }
 
+    fun setRoomData(roomData: RoomModel) {
+        roomName = roomData.roomName!!
+    }
+    
     private fun breakOn() {
-        val args = Bundle()
-        val inv = CancelAndContinue()
-        args.putString("destination", mData.text.toString())
 
-        //fragmentManager!!.beginTransaction().addToBackStack(null).replace(R.id.mFrameContainer, inv).commit()
+        //val inv = CancelAndContinue()
     }
 
 }

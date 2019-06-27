@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_gradients"
+    app:cardElevation="20dp">
+
+
+    <TextView
+        android:id="@+id/mThanku"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/comfortaa_regular"
+        android:gravity="center"
+        android:text="Delivery Successful"
+        android:textAllCaps="false"
+        android:textColor="#CDFFFFFF"
+        android:textSize="43sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mThanku"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/cancel_on_thanku_bg"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Start New Delivery"
+            android:textAllCaps="false"
+            android:textColor="@color/blueTextColor"
+            android:textSize="25sp"
+            android:id="@+id/startAgainBtn"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

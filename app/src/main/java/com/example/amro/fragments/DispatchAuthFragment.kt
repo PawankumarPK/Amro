@@ -1,10 +1,10 @@
 package com.example.amro.fragments
 
 import com.example.amro.R
+import com.example.amro.adapter.FragmentsAdapter
 import com.example.amro.api.RetrofitClient
-import com.example.amro.api.StandardModels.STATUS
 import com.example.amro.api.TripDetails
-import com.example.amro.api.UserModels.UserModel
+import com.example.amro.api.models.UserModels.UserModel
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,11 +17,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class PassCodeFragment : BaseFragment() {
+class DispatchAuthFragment() : BaseFragment() {
 
     var number: Long = 0
     lateinit var mDialog: Dialog
-     lateinit var status : STATUS
 
     private fun updateNumber(digit: Int) {
         number = number * 10 + digit
@@ -35,7 +34,6 @@ class PassCodeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mDialog = Dialog(baseActivity)
 
         val numBtns = arrayOf(mZero, mOne, mTwo, mThree, mFour,
@@ -48,64 +46,42 @@ class PassCodeFragment : BaseFragment() {
         mClear.setOnClickListener { onClear() }
     }
 
-
     private fun onClear() {
         number = 0
         mEditText.text = ""
     }
 
     private fun onCancel() {
-        fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, StartFragment()).commit()
-    }
-
-    private fun showProgressFragment() {
-        mProgressLayout.visibility = View.VISIBLE
-        mLinearLayout.visibility = View.GONE
-        mCancel.visibility = View.GONE
-    }
-
-
-    private fun loadBack() {
-        mProgressLayout.visibility = View.GONE
-        mLinearLayout.visibility = View.VISIBLE
-        mCancel.visibility = View.VISIBLE
-    }
-
-    private fun loadNext() {
-        mProgressLayout.visibility = View.GONE
-        TripDetails.TripId.toString()
-        fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, InventoryFragment()).commit()
+        pagerRef.currentItem = FragmentsAdapter.Screens.Start.ordinal
     }
 
     private fun onDone() {
 
         val api = RetrofitClient.apiService
-        val call = api.checkPasscode(mEditText.text.toString())
+        val call = api.dispatch(mEditText.text.toString().toInt(), TripDetails.TripId)
+
+        mProgressLayout.visibility = View.VISIBLE
 
         call.enqueue(object : Callback<UserModel> {
             override fun onFailure(call: Call<UserModel>?, t: Throwable?) {
-                loadBack()
+                mProgressLayout.visibility = View.GONE
                 Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
                 if (response.isSuccessful) {
                     val userData = response.body()!!
-                    if (userData.Id != -1) {
-                        TripDetails.UserId = userData.Id!!
-                        TripDetails.TripId = userData.TripId!!
-                        TripDetails.UserName = userData.Name!!
-                        //TripDetails.setUserData(userData)
-                        loadNext()
+                    if (userData.userId != -1) {
+                        TripDetails.UserName = userData.userName!!
+                        TripDetails.UserId = userData.userId!!
                     } else {
-                        loadBack()
+                        mProgressLayout.visibility = View.GONE
                         Toast.makeText(context, "Invalid Passcode", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         })
 
-        showProgressFragment()
         mEditText.text = ""
         number *= 0
 

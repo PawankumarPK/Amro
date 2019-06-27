@@ -1,4 +1,4 @@
-package com.example.amro.api.FloorRoomModels
+package com.example.amro.api.models.FloorRoomModels
 
 import com.google.gson.annotations.SerializedName
 

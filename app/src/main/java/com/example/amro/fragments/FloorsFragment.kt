@@ -1,9 +1,10 @@
 package com.example.amro.fragments
 
 import com.example.amro.R
-import com.example.amro.api.FloorRoomModels.FloorListModel
-import com.example.amro.api.FloorRoomModels.FloorModel
+import com.example.amro.adapter.FragmentsAdapter
 import com.example.amro.api.RetrofitClient
+import com.example.amro.api.models.FloorRoomModels.FloorListModel
+import com.example.amro.api.models.FloorRoomModels.FloorModel
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,8 +14,8 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.GridLayout
 import android.widget.Toast
+import kotlinx.android.synthetic.main.confirmation_dialog.*
 import kotlinx.android.synthetic.main.fragment_floor_number.*
-import kotlinx.android.synthetic.main.sure_dialog.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,11 +31,20 @@ class FloorsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mDialog = Dialog(baseActivity)
+        //mCancel.setOnClickListener { dialogBox() }
+    }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            getFloorButtons()
+        }
+    }
+
+    private fun getFloorButtons() {
         val api = RetrofitClient.apiService
-        val call = api.getFloorList()
+        val call = api.getFloorRoomList()
 
         call.enqueue(object : Callback<FloorListModel> {
             override fun onFailure(call: Call<FloorListModel>?, t: Throwable?) {
@@ -46,14 +56,12 @@ class FloorsFragment : BaseFragment() {
                 addFloorButtons()
             }
         })
-
-        mCancel.setOnClickListener { dialogBox() }
     }
 
     private fun addFloorButtons() {
         val constraintLayout = btnContainer as GridLayout
         val floorCount = floors.size
-
+        constraintLayout.removeAllViews()
         constraintLayout.rowCount = Math.ceil(floorCount.toDouble() / 5).toInt()
         constraintLayout.columnCount = 5
 
@@ -65,20 +73,18 @@ class FloorsFragment : BaseFragment() {
         }
     }
 
-    private fun floorBtnClick(floor: FloorModel) {
-        val fr = RoomsFragment()
-        fr.setFloorData(floor)
-        //fr.setTalkerListener(myTalker, myListener)
-        fragmentManager!!.beginTransaction().addToBackStack(null).replace(R.id.mFrameContainer, fr).commit()
+    private fun floorBtnClick(floor:FloorModel) {
+        (FragmentsAdapter.Screens.Rooms.screen as RoomsFragment).setFloorData(floor)
+        pagerRef.currentItem = FragmentsAdapter.Screens.Rooms.ordinal
     }
 
     private fun dialogBox() {
-        val layout = LayoutInflater.from(baseActivity).inflate(R.layout.sure_dialog, null, false)
+        val layout = LayoutInflater.from(baseActivity).inflate(R.layout.confirmation_dialog, null, false)
         mDialog.setContentView(layout)
         mDialog.mDone.setOnClickListener {
             val inv = StartFragment()
             //inv.setTalkerListener(myTalker, myListener)
-            fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, inv).addToBackStack(null).commit()
+            //fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, inv).addToBackStack(null).commit()
             mDialog.dismiss()
         }
         mDialog.mDiscard.setOnClickListener { mDialog.dismiss() }

@@ -1,21 +1,21 @@
-package com.example.amro.api.StockModels
+package com.example.amro.api.models.StockModels
 
 import com.google.gson.annotations.SerializedName
 
 class StockModel {
 
     @SerializedName("stockQuantity")
-    var stockQuantity : Int? = null
+    var stockQuantity : Int? = -1
 
     @SerializedName("tripId")
-    var tripId : Int? = null
+    var tripId : Int? = -1
 
     @SerializedName("stockName")
-    var stockName : String? = null
+    var stockName : String? = ""
 
 
     @SerializedName("stockId")
-    var stockId: Int? = null
+    var stockId: Int? = -1
 
 
 }

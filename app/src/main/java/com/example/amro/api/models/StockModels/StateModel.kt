@@ -1,4 +1,4 @@
-package com.example.amro.api.StockModels
+package com.example.amro.api.models.StockModels
 
 import com.google.gson.annotations.SerializedName
 
