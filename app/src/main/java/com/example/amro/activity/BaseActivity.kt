@@ -1,8 +1,6 @@
 package com.example.amro.activity
 
-import com.example.amro.MyDeviceAdminReceiver
-import com.example.amro.MyStateReceiver
-import com.example.amro.StateManagerService
+import com.example.amro.*
 import com.example.amro.adapter.FragmentsAdapter
 import com.example.amro.api.RetrofitClient
 import com.example.amro.utils.Helper
@@ -16,9 +14,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.example.amro.R
 import kotlinx.android.synthetic.main.activity_base.*
-
 
 class BaseActivity : AppCompatActivity() {
 
@@ -31,26 +27,42 @@ class BaseActivity : AppCompatActivity() {
             or View.SYSTEM_UI_FLAG_FULLSCREEN
             or View.SYSTEM_UI_FLAG_IMMERSIVE)
 
+    private val receiver = MyStateReceiver()
+    private val sbreceiver = BatteryInfoReceiver()
+    private val filter = IntentFilter("ai.jetbrain.RobotState")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
+
         startKioskMode()
 
         RetrofitClient.init(Helper.getConfigValue(this,"api_url")!!)
 
-        pager.setAdapter(FragmentsAdapter(supportFragmentManager, pager))
+        pager.adapter = FragmentsAdapter(supportFragmentManager, pager)
         pager.currentItem = FragmentsAdapter.Screens.Start.ordinal
 
-        val filter = IntentFilter("ai.jetbrain.RobotState")
-        val receiver = MyStateReceiver()
-        registerReceiver(receiver, filter)
         receiver.setPager(pager)
 
         Intent(this, StateManagerService::class.java).also { intent ->
             startService(intent)
         }
+        Intent(this, DeviceManagerService::class.java).also { intent ->
+            startService(intent)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(receiver)
+        unregisterReceiver(sbreceiver)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(receiver, filter)
+        registerReceiver(sbreceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
     }
 
     private fun startKioskMode() {

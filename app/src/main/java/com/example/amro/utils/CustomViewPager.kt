@@ -33,4 +33,12 @@ class CustomViewPager(context: Context, attr: AttributeSet) : ViewPager(context,
     fun setPagingEnabled(enabled: Boolean) {
         this.swipeEnabled = enabled
     }
+
+    override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
+        super.setCurrentItem(item, false)
+    }
+
+    override fun setCurrentItem(item: Int) {
+        super.setCurrentItem(item, false)
+    }
 }

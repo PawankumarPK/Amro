@@ -23,7 +23,7 @@ import retrofit2.Response
 class RoomsFragment : BaseFragment() {
 
     private lateinit var mDialog: Dialog
-    private lateinit var floor:FloorModel
+    private lateinit var floor: FloorModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_floor_room, container, false)
@@ -45,11 +45,11 @@ class RoomsFragment : BaseFragment() {
         }
     }
 
-    fun setFloorData(floorData:FloorModel) {
+    fun setFloorData(floorData: FloorModel) {
         floor = floorData
     }
 
-    fun addRoomButtons() {
+    private fun addRoomButtons() {
         mFloor.text = floor.floorName
         val constraintLayout = roomBtnContainer as GridLayout
         constraintLayout.removeAllViews()
@@ -58,14 +58,15 @@ class RoomsFragment : BaseFragment() {
             constraintLayout.addView(button)
             button.text = room.roomName
             button.setOnClickListener {
+
+                (FragmentsAdapter.Screens.Break.screen as BreakFragment).setRoomData(room.roomName!!)
                 sendGoal(room.roomId!!)
-                (FragmentsAdapter.Screens.Break.screen as BreakFragment).setRoomData(room)
                 pagerRef.currentItem = FragmentsAdapter.Screens.Progress.ordinal
             }
         }
     }
 
-    private fun sendGoal(roomId:Int) {
+    private fun sendGoal(roomId: Int) {
         val api = RetrofitClient.apiService
         val call = api.setGoal(roomId, TripDetails.TripId)
 

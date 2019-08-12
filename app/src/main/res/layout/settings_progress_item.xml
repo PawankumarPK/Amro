@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
-    android:layout_width="wrap_content"
-    android:layout_height="100dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:background="@color/grey"
+    android:gravity="center"
+    android:padding="20dp"
     android:orientation="horizontal"
-    android:textAlignment="center"
-    android:gravity="center">
+    android:textAlignment="center">
 
     <TextView
         android:id="@+id/mProgressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/textview_border"
         android:padding="@dimen/fab_margin"
         android:text="27.2V"
-        android:textSize="@dimen/subItemsTextSize"
-        android:background="@drawable/textview_border"/>
+        android:textSize="@dimen/subItemsTextSizeTab" />
 
     <TextView
         android:id="@+id/mProgressTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
         android:paddingLeft="@dimen/fab_margin"
         android:paddingRight="@dimen/fab_margin"
         android:text="Setting"
-        android:textSize="@dimen/ItemsTextSize" />
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.amro.adapter
 
+import com.example.amro.Arya.SpeechToTextFragment
 import com.example.amro.fragments.*
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -13,22 +14,31 @@ class FragmentsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     enum class Screens(val screen: BaseFragment) {
 
-        Ready       (GettingReady()),
-        Settings    (SettingsFragment()),
-        Start       (StartFragment()),
-        DispatchAuth(DispatchAuthFragment()),
-        ScanIn      (ScanInFragment()),
-        Floors      (FloorsFragment()),
-        Rooms       (RoomsFragment()),
-        Progress    (ProgressFragment()),
-        Break       (BreakFragment()),
-        DeliveryAuth(DeliveryAuthFragment()),
-        ScanOut     (ScanOutFragment()),
-        DeliveryDone(DeliveryComplete())
+        Joystick(JoystickFragment()),
+        Battery(BatteryChgFragment()),
+        Settings(SettingsFragment()),
+        Trouble(TroubleFragment()),
+        Start(StartFragment()),
+        ScanIn(ScanInFragment()),
+        Floors(FloorsFragment()),
+        Rooms(RoomsFragment()),
+        Progress(ProgressFragment()),
+        Auth(AuthFragment()),
+        Break(BreakFragment()),
+        Receive(ReceiveFragment()),
+        ScanOut(ScanOutFragment()),
+        DeliveryDone(DeliveryComplete()),
+        ContinueNav(ContinueNavFragment()),
+
+        SpeechToText(SpeechToTextFragment()),
+
+
+
     }
 
-    constructor(fm: FragmentManager, pager:ViewPager): this(fm) {
+    constructor(fm: FragmentManager, pager: ViewPager) : this(fm) {
         enumValues<Screens>().forEach {
+
             it.screen.setPagerReference(pager)
         }
     }

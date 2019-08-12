@@ -16,27 +16,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Are You Sure ?"
-                android:textSize="40sp"
-                android:textColor="#fff"
+                android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:layout_gravity="center_vertical"/>
+                android:text="Are You Sure ?"
+                android:textColor="#fff"
+                android:textSize="40sp" />
 
         </LinearLayout>
-
-<!--
-
-        <TextView
-            android:id="@+id/mSure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Confirm To Cancel Delivery"
-            android:textSize="20sp"
-            android:layout_below="@+id/mLinearLayout"
-            android:textColor="#2B2B2B"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"/>
--->
 
 
         <LinearLayout
@@ -50,13 +36,13 @@
                 android:id="@+id/mDiscard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
                 android:background="@drawable/grey_gradients"
                 android:fontFamily="sans-serif-condensed"
                 android:text="Discard"
-                android:layout_margin="10dp"
-                android:layout_weight="5"
                 android:textAllCaps="false"
-                android:textColor="#CDFFFFFF"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="20sp" />
 
 
@@ -64,13 +50,13 @@
                 android:id="@+id/mDone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
                 android:background="@drawable/grey_gradients"
                 android:fontFamily="sans-serif-condensed"
                 android:text="Yes"
-                android:layout_margin="10dp"
                 android:textAllCaps="false"
-                android:layout_weight="5"
-                android:textColor="#CDFFFFFF"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="20sp" />
         </LinearLayout>
 

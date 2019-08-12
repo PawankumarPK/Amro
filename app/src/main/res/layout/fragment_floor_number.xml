@@ -6,28 +6,27 @@
     android:background="#DDFFFFFF"
     tools:context=".fragments.FloorsFragment">
 
+
     <Button
         android:id="@+id/mCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="110dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/grey_gradients"
-        android:fontFamily="@font/comfortaa_bold"
-        android:text="Cancel Delivery"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="15sp" />
+        android:contentDescription="@null"
+        android:src="@drawable/ic_close"
+        android:text="Back"
+        android:visibility="invisible"
+        android:textColor="@drawable/button_text_color"/>
 
     <GridLayout
         android:id="@+id/btnContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:orientation="horizontal"
-        android:useDefaultMargins="true"
-        android:layout_centerInParent="true">
+        android:useDefaultMargins="true">
 
     </GridLayout>
 

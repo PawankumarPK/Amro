@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
     android:layout_width="wrap_content"
-    android:layout_height="100dp"
-    android:layout_margin="10dp"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:gravity="center"
+    android:background="@color/grey"
     android:textAlignment="center"
-    android:gravity="center">
+    app:cardCornerRadius="5dp">
 
     <CheckBox
         android:id="@+id/mCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:button="@drawable/connect_disconnect_checkbox"
-        android:checked="false"/>
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:button="@drawable/connect_disconnect_checkbox" />
 
     <TextView
         android:id="@+id/mCheckTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/fab_margin"
-        android:paddingRight="@dimen/fab_margin"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"
         android:text="Setting"
-        android:textSize="@dimen/ItemsTextSize" />
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
-</LinearLayout>
+</RelativeLayout>

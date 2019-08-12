@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Amro</string>
+    <string name="app_name">SAR</string>
 
     <string name="admin_description">Jetbrain Admin</string>
     <string name="unlock_button">Start Delivery</string>
@@ -28,7 +28,15 @@
     <string name="move_left_button">Move\nLeft</string>
     <string name="title_activity_pub_sub">PubSubActivity</string>
     <string name="admin_button1">Admin Panel</string>
+    <string name="i_m_charging">I\'m charging</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Arya Fragment String
+    <string name="hello_everyone">Hello Everyone</string>
+    <string name="imarya">I\'m Arya</string>
+    <string name="welcometococubes">Welcome To CoCubes</string>
+    <string name="helloimarya">Hello, I\'m Arya</string>
+
+
+
 </resources>

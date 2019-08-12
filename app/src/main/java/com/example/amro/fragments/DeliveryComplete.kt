@@ -1,6 +1,7 @@
 package com.example.amro.fragments
 
 import com.example.amro.R
+import com.example.amro.adapter.FragmentsAdapter
 import com.example.amro.api.RetrofitClient
 import com.example.amro.api.models.StandardModels.StdStatusModel
 import android.os.Bundle
@@ -24,7 +25,12 @@ class DeliveryComplete : BaseFragment() {
 
         startAgainBtn.setOnClickListener {
             startNewTrip()
+            pagerRef.currentItem = FragmentsAdapter.Screens.Progress.ordinal
         }
+    }
+
+    fun setDeliveryStatusText(txt:String) {
+        //mThanku.text = txt
     }
 
     private fun startNewTrip() {

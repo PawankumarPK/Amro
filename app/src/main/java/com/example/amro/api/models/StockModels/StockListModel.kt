@@ -7,5 +7,4 @@ class StockListModel {
     @SerializedName("amroStock")
     val stockList: ArrayList<StockModel>? = null
 
-
 }

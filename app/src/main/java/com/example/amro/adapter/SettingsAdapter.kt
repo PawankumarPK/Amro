@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.settings_progress_item.view.*
 import kotlinx.android.synthetic.main.settings_status_item.view.*
 
 
-class SettingsAdapter(val list: Map<Int,SettingsFragment.SettingItem>) : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
+class SettingsAdapter(private val list: Map<Int,SettingsFragment.SettingItem>) : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(viewType, parent, false))
@@ -26,7 +26,7 @@ class SettingsAdapter(val list: Map<Int,SettingsFragment.SettingItem>) : Recycle
 
     override fun getItemViewType(position: Int): Int {
         val item = list.get(position)!!
-        var type:Int
+        val type:Int
 
         when(item.type) {
             SettingsFragment.SettingType.Status ->

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fff"
-    tools:context=".fragments.InventoryFragment">
+    android:background="@color/white"
+    tools:context=".fragments.ScanInFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,8 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp">
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -29,26 +29,9 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
-                android:indeterminateOnly="true"/>
-
-            <!--
-                        <ProgressBar
-                            android:id="@+id/determinateBar"
-                            android:layout_width="match_parent"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="10dp"
-                            android:indeterminateBehavior="repeat"
-                            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
-                            android:indeterminateDuration="10"
-                            android:indeterminateOnly="true"
-                            android:maxHeight="24dip"
-                            android:minHeight="24dip"
-                            android:progressBackgroundTint="#208afa"
-                            android:progressBackgroundTintMode="multiply"
-                            android:visibility="visible" />
-            -->
+                android:layout_marginStart="10dp"
+                android:indeterminateOnly="true" />
 
         </LinearLayout>
 
@@ -60,7 +43,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/mDone"
@@ -68,9 +52,27 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/comfortaa_bold"
                 android:gravity="center"
-                android:text="Close Door to continue..."
+                android:text="close door to continue..."
                 android:textColor="#969494"
                 android:textSize="40sp" />
+
+            <SurfaceView
+                android:id="@+id/cameraPreview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white" />
+
+            <TextView
+                android:id="@+id/txtResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cameraPreview"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="Result"
+                android:textSize="20sp" />
+
 
 
         </LinearLayout>

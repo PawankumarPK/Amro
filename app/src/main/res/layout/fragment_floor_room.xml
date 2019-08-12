@@ -6,14 +6,17 @@
     android:background="#DDFFFFFF"
     tools:context=".fragments.RoomsFragment">
 
-    <ImageView
+    <Button
         android:id="@+id/mCancel"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/grey_gradients"
         android:contentDescription="@null"
-        android:src="@drawable/ic_close" />
+        android:src="@drawable/ic_close"
+        android:text="Back"
+        android:textColor="@drawable/button_text_color"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +32,7 @@
             android:fontFamily="@font/comfortaa_bold"
             android:gravity="center"
             android:text="2"
-            android:textColor="#fff"
+            android:textColor="@drawable/button_text_color"
             android:textSize="70sp" />
 
 

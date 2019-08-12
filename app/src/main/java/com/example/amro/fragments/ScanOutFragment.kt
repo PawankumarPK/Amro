@@ -1,6 +1,7 @@
 package com.example.amro.fragments
 
 import com.example.amro.R
+import com.example.amro.adapter.FragmentsAdapter
 import com.example.amro.adapter.InventoryAdapter
 import com.example.amro.api.RetrofitClient
 import com.example.amro.api.TripDetails
@@ -28,6 +29,7 @@ class ScanOutFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mDone.text ="close door to finish..."
         adapter = InventoryAdapter()
         mRecyclerView.adapter = adapter
         mRecyclerView.layoutManager = LinearLayoutManager(baseActivity)
@@ -36,34 +38,34 @@ class ScanOutFragment : BaseFragment() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {
+            (FragmentsAdapter.Screens.DeliveryDone.screen as DeliveryComplete)
+                    .setDeliveryStatusText("Delivery Successful")
             updateInventory()
         }
     }
 
     private fun updateInventory() {
-        if(userVisibleHint) {
-            val api = RetrofitClient.apiService
-            val call = api.getStockList(TripDetails.TripId)
-            call.enqueue(object : Callback<StockListModel> {
-                override fun onFailure(call: Call<StockListModel>?, t: Throwable?) {
-                    Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
-                    Handler().postDelayed({
-                        updateInventory()
-                    }, 5000)
-                }
+        val api = RetrofitClient.apiService
+        val call = api.getStockList(TripDetails.TripId)
+        call.enqueue(object : Callback<StockListModel> {
+            override fun onFailure(call: Call<StockListModel>?, t: Throwable?) {
+                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                Handler().postDelayed({
+                    updateInventory()
+                }, 5000)
+            }
 
-                override fun onResponse(call: Call<StockListModel>?, response: Response<StockListModel>?) {
-                    if (response!!.isSuccessful) {
-                        val list = response.body().stockList!!
-                        adapter.updateList(ArrayList(list.filter { it.stockQuantity!!>0 }))
-                        adapter.notifyDataSetChanged()
-                    }
-                    Handler().postDelayed({
-                        updateInventory()
-                    }, 1000)
-
+            override fun onResponse(call: Call<StockListModel>?, response: Response<StockListModel>?) {
+                if (response!!.isSuccessful) {
+                    var list = response.body().stockList!!
+                    adapter.updateList(ArrayList(list.filter { it.stockQuantity!!>0 }))
+                    adapter.notifyDataSetChanged()
                 }
-            })
-        }
+                Handler().postDelayed({
+                    updateInventory()
+                }, 1000)
+
+            }
+        })
     }
 }

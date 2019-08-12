@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mPassCodeRelative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DDFFFFFF"
-    tools:context=".fragments.PassCodeFragment">
-
-    <include
-        android:id="@+id/mProgressLayout"
-        layout="@layout/progress_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:visibility="gone" />
+    tools:context=".fragments.ReceiveFragment">
 
     <LinearLayout
-        android:id="@+id/mLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -31,6 +21,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily=""
             android:gravity="center"
             android:hint="Enter Passcode"
             android:inputType="numberPassword"
@@ -47,10 +38,10 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="1"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -61,10 +52,10 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="2"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -75,10 +66,10 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="3"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -97,10 +88,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="4"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -110,10 +101,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="5"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -123,10 +114,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="6"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -146,10 +137,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="7"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -159,10 +150,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="8"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -172,10 +163,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="9"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -194,11 +185,11 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Clear"
                 android:textAllCaps="false"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -208,10 +199,10 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="0"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -221,11 +212,11 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_bg_color"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Done"
                 android:textAllCaps="false"
-                android:textColor="#fff"
+                android:textColor="@drawable/button_text_color"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -236,13 +227,25 @@
     </LinearLayout>
 
 
-    <ImageView
+    <Button
         android:id="@+id/mCancel"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_close" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_gravity="end"
+        android:background="@drawable/grey_gradients"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_close"
+        android:text="Back"
+        android:textColor="@drawable/button_text_color"/>
+
+    <include
+        android:id="@+id/mProgressLayout"
+        layout="@layout/progress_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
 
 
-</RelativeLayout>
+</FrameLayout>

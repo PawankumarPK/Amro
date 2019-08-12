@@ -2,29 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="10"
     android:background="#fff"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/mTrouble"
+        layout="@layout/fragment_trouble"
+        android:visibility="gone" />
 
-    <ProgressBar
-        android:id="@+id/mProgress"
+
+    <LinearLayout
+        android:id="@+id/mProgressLinear"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:theme="@style/BlueAccent"
-        android:layout_weight="5" />
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/comfortaa_light"
-        android:gravity="center_horizontal"
-        android:text="Wait a moment..."
-        android:textColor="#498FB0"
-        android:textSize="40sp"
-        android:layout_marginBottom="10dp"
-        android:textStyle="bold" />
+        <ProgressBar
+            android:id="@+id/mProgress"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="5"
+            android:theme="@style/BlueAccent" />
 
+        <TextView
+            android:id="@+id/mPleaseWait"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:gravity="center_horizontal"
+            android:text="Please Wait..."
+            android:textColor="#498FB0"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </LinearLayout>

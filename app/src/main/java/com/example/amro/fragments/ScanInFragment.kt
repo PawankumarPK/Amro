@@ -26,7 +26,7 @@ class ScanInFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_inventries, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState:  Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = InventoryAdapter()
@@ -42,7 +42,7 @@ class ScanInFragment : BaseFragment() {
     }
 
     private fun updateInventory() {
-        if(userVisibleHint) {
+        if (userVisibleHint) {
             val api = RetrofitClient.apiService
             val call = api.getStockList(TripDetails.TripId)
             call.enqueue(object : Callback<StockListModel> {
@@ -58,6 +58,7 @@ class ScanInFragment : BaseFragment() {
                         //Log.e("----->",response.body().stockList!!.size.toString())
                         adapter.updateList(response.body().stockList!!)
                         adapter.notifyDataSetChanged()
+
                     }
                     Handler().postDelayed({
                         updateInventory()
@@ -68,3 +69,4 @@ class ScanInFragment : BaseFragment() {
         }
     }
 }
+
