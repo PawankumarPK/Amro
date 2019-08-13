@@ -7,9 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.view.ViewPager
 
-/**
- * Created by ajayvishnu on 22/06/19.
- */
 class MyStateReceiver: BroadcastReceiver() {
 
     private var mPager: ViewPager? = null
