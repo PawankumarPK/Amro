@@ -2,6 +2,8 @@ package com.example.amro.api
 
 import com.example.amro.api.models.FloorRoomModels.FloorListModel
 import com.example.amro.api.models.FloorRoomModels.RoomListModel
+import com.example.amro.api.models.Navigation.Face
+import com.example.amro.api.models.Navigation.RosMap
 import com.example.amro.api.models.StandardModels.DeviceStatsModel
 import com.example.amro.api.models.StandardModels.StdStatusModel
 import com.example.amro.api.models.StockModels.StateModel
@@ -17,7 +19,7 @@ interface ApiService {
     fun getState(): Call<StateModel>
 
     @GET("/amro-stock")
-    fun getStockList(@Query("tripid") tripId:Int): Call<StockListModel>
+    fun getStockList(@Query("tripid") tripId: Int): Call<StockListModel>
 
     @GET("/floors-rooms")
     fun getFloorRoomList(): Call<FloorListModel>
@@ -26,27 +28,37 @@ interface ApiService {
     fun getFloorList(): Call<FloorListModel>
 
     @GET("/rooms")
-    fun getRoomList(@Query("floorId") floorId:Int): Call<RoomListModel>
+    fun getRoomList(@Query("floorId") floorId: Int): Call<RoomListModel>
 
     @GET("/dispatch")
-    fun dispatch(@Query("pin") pin:Int, @Query("tripid") tripId:Int): Call<UserModel>
+    fun dispatch(@Query("pin") pin: Int, @Query("tripid") tripId: Int): Call<UserModel>
 
     @GET("/delivery")
-    fun delivery(@Query("pin") pin:Int, @Query("tripid") tripId:Int): Call<UserModel>
+    fun delivery(@Query("pin") pin: Int, @Query("tripid") tripId: Int): Call<UserModel>
 
     @GET("/cancel-delivery")
-    fun cancelDelivery(@Query("pin") pin:Int, @Query("tripid") tripId:Int): Call<UserModel>
+    fun cancelDelivery(@Query("pin") pin: Int, @Query("tripid") tripId: Int): Call<UserModel>
 
     @GET("/set-goal")
-    fun setGoal(@Query("goalid") goalId:Int, @Query("tripid") tripId:Int): Call<StdStatusModel>
+    fun setGoal(@Query("goalid") goalId: Int, @Query("tripid") tripId: Int): Call<StdStatusModel>
+
+    @GET("/set-goal-xy")
+    fun setGoalXY(@Query("x") x: Float,@Query("y") y: Float, @Query("tripid") tripId: Int): Call<StdStatusModel>
 
     @GET("/newtrip")
     fun newTrip(): Call<StdStatusModel>
 
     @GET("/set-break")
-    fun setBreak(@Query("stop") stop:Int, @Query("tripid") tripId:Int): Call<StdStatusModel>
+    fun setBreak(@Query("stop") stop: Int, @Query("tripid") tripId: Int): Call<StdStatusModel>
 
     @GET("/device-stats")
     fun deviceStats(): Call<DeviceStatsModel>
+
+    @GET("/face-xy")
+    fun faceXY(): Call<Face>
+
+    @GET("/map")
+    fun getMap(): Call<RosMap>
+
 
 }

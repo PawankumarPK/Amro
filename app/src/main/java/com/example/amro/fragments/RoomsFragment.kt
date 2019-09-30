@@ -9,6 +9,7 @@ import com.example.amro.api.models.FloorRoomModels.FloorModel
 import com.example.amro.api.models.StandardModels.StdStatusModel
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,8 @@ class RoomsFragment : BaseFragment() {
 
     fun setFloorData(floorData: FloorModel) {
         floor = floorData
+        Log.d("floorData",floorData.toString())
+
     }
 
     private fun addRoomButtons() {
@@ -57,8 +60,8 @@ class RoomsFragment : BaseFragment() {
             val button = LayoutInflater.from(context).inflate(R.layout.floor_button, null) as Button
             constraintLayout.addView(button)
             button.text = room.roomName
+            Log.d("valueX",room.roomName.toString())
             button.setOnClickListener {
-
                 (FragmentsAdapter.Screens.Break.screen as BreakFragment).setRoomData(room.roomName!!)
                 sendGoal(room.roomId!!)
                 pagerRef.currentItem = FragmentsAdapter.Screens.Progress.ordinal

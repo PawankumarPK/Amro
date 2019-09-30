@@ -6,7 +6,6 @@ import com.example.amro.api.RetrofitClient
 import com.example.amro.api.TripDetails
 import com.example.amro.api.models.FloorRoomModels.FloorListModel
 import com.example.amro.api.models.FloorRoomModels.FloorModel
-import com.example.amro.api.models.StandardModels.StdStatusModel
 import com.example.amro.api.models.StockModels.StockListModel
 import android.app.Dialog
 import android.os.Bundle
@@ -78,19 +77,10 @@ class FloorsFragment : BaseFragment() {
     }
 
     private fun floorBtnClick(floor: FloorModel) {
-        (FragmentsAdapter.Screens.Rooms.screen as RoomsFragment).setFloorData(floor)
-        pagerRef.currentItem = FragmentsAdapter.Screens.Rooms.ordinal
+        //(FragmentsAdapter.Screens.Rooms.screen as RoomsFragment).setFloorData(floor)
+        //pagerRef.currentItem = FragmentsAdapter.Screens.Rooms.ordinal
+        pagerRef.currentItem = FragmentsAdapter.Screens.Navigation.ordinal
     }
-/*
-    private fun openScanIn() {
-        (FragmentsAdapter.Screens.ScanIn.screen as ScanInFragment)
-
-        pagerRef.currentItem = FragmentsAdapter.Screens.ScanIn.ordinal
-
-
-    }*/
-
-
 
     private fun openScanIn() {
         val api = RetrofitClient.apiService

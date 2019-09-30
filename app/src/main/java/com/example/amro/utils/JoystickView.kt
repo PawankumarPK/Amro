@@ -134,7 +134,8 @@ class JoystickView : SurfaceView, SurfaceHolder.Callback, View.OnTouchListener {
                 }
             } else
                 drawJoystick(centerX, centerY)
-        //    joystickCallback!!.onJoystickMoved(0f, 0f, id)
+
+            joystickCallback!!.onJoystickMoved(0f, 0f, id)
         }
         return true
     }

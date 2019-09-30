@@ -1,6 +1,5 @@
 package com.example.amro.adapter
 
-import com.example.amro.Arya.SpeechToTextFragment
 import com.example.amro.fragments.*
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -14,6 +13,8 @@ class FragmentsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     enum class Screens(val screen: BaseFragment) {
 
+
+        Navigation(NavigationFragment()),
         Joystick(JoystickFragment()),
         Battery(BatteryChgFragment()),
         Settings(SettingsFragment()),
@@ -29,10 +30,6 @@ class FragmentsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         ScanOut(ScanOutFragment()),
         DeliveryDone(DeliveryComplete()),
         ContinueNav(ContinueNavFragment()),
-
-        SpeechToText(SpeechToTextFragment()),
-
-
 
     }
 

@@ -35,10 +35,10 @@ class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
-
         startKioskMode()
 
         RetrofitClient.init(Helper.getConfigValue(this,"api_url")!!)
+        RetrofitClient.initRosAPI(Helper.getConfigValue(this,"ros_url")!!)
 
         pager.adapter = FragmentsAdapter(supportFragmentManager, pager)
         pager.currentItem = FragmentsAdapter.Screens.Start.ordinal
@@ -51,12 +51,17 @@ class BaseActivity : AppCompatActivity() {
         Intent(this, DeviceManagerService::class.java).also { intent ->
             startService(intent)
         }
+        Intent(this, LocationTrackService::class.java).also { intent ->
+            startService(intent)
+        }
+
     }
 
     override fun onPause() {
         super.onPause()
         unregisterReceiver(receiver)
         unregisterReceiver(sbreceiver)
+
     }
 
     override fun onResume() {

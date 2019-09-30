@@ -23,7 +23,7 @@
         android:textColor="@drawable/button_text_color"/>
 
 
-    <ai.jetbrain.sar.utils.JoystickView
+    <com.example.amro.utils.JoystickView
         android:id="@+id/mJoystick"
         android:layout_width="match_parent"
         android:layout_height="500dp"

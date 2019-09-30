@@ -10,4 +10,5 @@ class RoomModel {
     @SerializedName("roomId")
     var roomId: Int? = null
 
+
 }

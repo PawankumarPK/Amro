@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager
 
 open class BaseFragment : Fragment() {
 
-    lateinit var baseActivity : BaseActivity
+     var baseActivity : BaseActivity?? = null
 
     lateinit var pagerRef:ViewPager
 
@@ -19,5 +19,4 @@ open class BaseFragment : Fragment() {
     fun setPagerReference(ref:ViewPager) {
         pagerRef = ref
     }
-
 }

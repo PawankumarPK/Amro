@@ -7,24 +7,54 @@
     android:scrollbars="none"
     tools:context=".fragments.SettingsFragment">
 
-    <Button
-        android:id="@+id/settingsDoneBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:background="@drawable/grey_gradients"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_close"
-        android:text="Back"
-        android:textColor="@drawable/button_text_color"/>
+    <RelativeLayout
+        android:id="@+id/mRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/mBatterAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/settingsDoneBtn"
+            android:src="@drawable/ic_battery_alert"
+            android:visibility="invisible"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/mBatterCharging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/settingsDoneBtn"
+            android:src="@drawable/ic_battery_charging"
+            android:visibility="invisible"
+            android:layout_centerVertical="true"/>
+
+
+        <Button
+            android:id="@+id/settingsDoneBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/grey_gradients"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_close"
+            android:text="Back"
+            android:textColor="@drawable/button_text_color" />
+
+
+
+    </RelativeLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/settingsDoneBtn" />
+        android:layout_below="@+id/mRelativeLayout" />
 
 
 </RelativeLayout>

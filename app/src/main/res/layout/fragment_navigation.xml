@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="fitXY"
+    android:src="@drawable/rviz"
+    android:id="@+id/mRviz"
+    tools:context=".fragments.NavigationFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/rviz"
+        android:visibility="gone"/>
+
+    <GridLayout
+        android:id="@+id/canvasHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/infoMessage"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:text="Loading Map.."
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/mBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bot"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/mSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="550dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/ic_source"
+        android:visibility="gone"/>
+
+
+
+    <ImageView
+        android:id="@+id/mTestZoom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_launcher_background" />
+
+
+
+
+
+</RelativeLayout>

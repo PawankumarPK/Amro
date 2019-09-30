@@ -5,11 +5,7 @@ package com.example.amro.api
  */
 object TripDetails {
 
-    var UserId:Int = -1
-
     var TripId:Int = -1
-
-    var UserName:String = ""
 
     var TripState:Int = -1
 

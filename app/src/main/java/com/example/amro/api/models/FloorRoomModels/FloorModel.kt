@@ -10,7 +10,5 @@ class FloorModel {
     @SerializedName("floorName")
     var floorName : String? = null
 
-    @SerializedName("floorId")
-    var floorId : Int? = null
 
 }

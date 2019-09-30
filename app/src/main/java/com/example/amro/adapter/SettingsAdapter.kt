@@ -3,6 +3,7 @@ package com.example.amro.adapter
 import com.example.amro.R
 import com.example.amro.fragments.SettingsFragment
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class SettingsAdapter(private val list: Map<Int,SettingsFragment.SettingItem>) :
                 SettingsFragment.SettingType.Progress -> {
                     itemView.mProgressTextview.text = data.name;
                     itemView.mProgressText.text = data.value
+                    Log.d("value---","${data.value}")
                 }
             }
         }
