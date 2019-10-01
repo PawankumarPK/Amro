@@ -1,18 +1,17 @@
 package com.example.amro.fragments
 
-
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.PointF
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
-import com.example.amro.utils.Helper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.amro.R
@@ -20,6 +19,7 @@ import com.example.amro.api.LocationStats
 import com.example.amro.api.RetrofitClient
 import com.example.amro.api.TripDetails
 import com.example.amro.api.models.StandardModels.StdStatusModel
+import com.example.amro.utils.Helper
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -30,7 +30,6 @@ import retrofit2.Response
 
 
 class NavigationFragment : BaseFragment(), View.OnTouchListener {
-
 
     var sendingGoal_inProgress = false
     val TAG = "NavFrag"
@@ -55,23 +54,36 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mTestZoom.setOnTouchListener(this)
+
+        mMapZoom.setOnTouchListener(this)
         LoadMap()
         updateBotXY()
+        animation()
+        mForward.setOnClickListener {
+            mMapZoom.visibility = View.INVISIBLE
+            mLoading.visibility = View.INVISIBLE
+        }
+
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-        }
     }
 
+    private fun animation() {
+        val anim  = AnimationUtils.loadAnimation(baseActivity, R.anim.rotate_forward)
+        mLoading.startAnimation(anim)
 
-    var target: Target = object : Target {
+    }
+
+    private var target: Target = object : Target {
         override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
             if (bitmap != null) {
-                mTestZoom.setImageBitmap(bitmap)
+                mMapZoom.setImageBitmap(bitmap)
+                mLoading.clearAnimation()
+                mLoading.visibility = View.GONE
             }
+
             Handler().postDelayed({
                 LoadMap()
             }, 2000)
@@ -86,11 +98,13 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                 LoadMap()
             }, 5000)
         }
+
     }
 
     fun LoadMap() {
-        Picasso.get().load(Helper.getConfigValue(baseActivity!!,"ros_url")!! + "/map").memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
+        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map").memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
         Log.i(TAG, "Loading Image...")
+
     }
 
     fun SendGoal(x: Float, y: Float) {
@@ -120,7 +134,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
         })
     }
 
-    fun updateBotXY() {
+    private fun updateBotXY() {
         Thread {
             if (baseActivity != null)
                 baseActivity!!.runOnUiThread {

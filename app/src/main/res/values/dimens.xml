@@ -7,4 +7,10 @@
     <dimen name="ItemsTextSizeTabTwo">30sp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="joystickButtons">40dp</dimen>
+    <dimen name="joystickButtonsTab">85dp</dimen>
+    <dimen name="joystickButtonsMobile">100dp</dimen>
+    <dimen name="JBtnTextsize">16sp</dimen>
+    <dimen name="JBtnTextsizeTab">46sp</dimen>
+    <dimen name="JBtnMargin">10dp</dimen>
 </resources>
