@@ -1,5 +1,11 @@
 package com.example.amro.fragments
 
+
+import com.example.amro.api.LocationStats
+import com.example.amro.api.RetrofitClient
+import com.example.amro.api.TripDetails
+import com.example.amro.api.models.StandardModels.StdStatusModel
+import com.example.amro.utils.Helper
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.PointF
@@ -15,11 +21,6 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.amro.R
-import com.example.amro.api.LocationStats
-import com.example.amro.api.RetrofitClient
-import com.example.amro.api.TripDetails
-import com.example.amro.api.models.StandardModels.StdStatusModel
-import com.example.amro.utils.Helper
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
