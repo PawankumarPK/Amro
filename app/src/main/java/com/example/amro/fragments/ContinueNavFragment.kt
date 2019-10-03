@@ -1,25 +1,25 @@
 package com.example.amro.fragments
 
 
-import com.example.amro.R
-import com.example.amro.adapter.FragmentsAdapter
-import com.example.amro.api.RetrofitClient
-import com.example.amro.api.TripDetails
-import com.example.amro.api.models.StandardModels.StdStatusModel
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.amro.R
+import com.example.amro.adapter.FragmentsAdapter
+import com.example.amro.api.RetrofitClient
+import com.example.amro.api.TripDetails
+import com.example.amro.api.models.StandardModels.StdStatusModel
 import kotlinx.android.synthetic.main.fragment_cancel_and_continue.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ContinueNavFragment : BaseFragment(){
+class ContinueNavFragment : BaseFragment() {
 
-      fun updateNumber(digit: Int) {
+    fun updateNumber(digit: Int) {
         number = number * 10 + digit
     }
 
@@ -52,7 +52,10 @@ class ContinueNavFragment : BaseFragment(){
                 Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
+            override fun onResponse(
+                call: Call<StdStatusModel>,
+                response: Response<StdStatusModel>
+            ) {
 
             }
         })
@@ -63,10 +66,11 @@ class ContinueNavFragment : BaseFragment(){
 
     private fun cancelNav() {
         (FragmentsAdapter.Screens.DeliveryDone.screen as DeliveryComplete)
-                .setDeliveryStatusText("Delivery Cancelled")
+            .setDeliveryStatusText("Delivery Cancelled")
 
         (FragmentsAdapter.Screens.Auth.screen as AuthFragment).setActionParams(
-                AuthFragment.AuthType.CancelAuth, FragmentsAdapter.Screens.ContinueNav)
+            AuthFragment.AuthType.CancelAuth, FragmentsAdapter.Screens.ContinueNav
+        )
 
         pagerRef.currentItem = FragmentsAdapter.Screens.Auth.ordinal
 

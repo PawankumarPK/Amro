@@ -1,11 +1,6 @@
 package com.example.amro.fragments
 
 
-import com.example.amro.R
-import com.example.amro.adapter.FragmentsAdapter
-import com.example.amro.api.RetrofitClient
-import com.example.amro.api.TripDetails
-import com.example.amro.api.models.UserModels.UserModel
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,6 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import com.example.amro.R
+import com.example.amro.adapter.FragmentsAdapter
+import com.example.amro.api.RetrofitClient
+import com.example.amro.api.TripDetails
+import com.example.amro.api.models.UserModels.UserModel
 import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.passcode_error_dialog.*
 import retrofit2.Call
@@ -39,7 +39,11 @@ class AuthFragment : BaseFragment() {
         mEditText.text = number.toString()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_auth, container, false)
     }
 
@@ -47,8 +51,10 @@ class AuthFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val numBtns = arrayOf(mZero, mOne, mTwo, mThree, mFour,
-                mFive, mSix, mSeven, mEight, mNine)
+        val numBtns = arrayOf(
+            mZero, mOne, mTwo, mThree, mFour,
+            mFive, mSix, mSeven, mEight, mNine
+        )
         for (i in 0 until numBtns.size)
             numBtns[i].setOnClickListener { updateNumber(i) }
 
@@ -121,7 +127,8 @@ class AuthFragment : BaseFragment() {
 
     private fun errorPasscodeDialog() {
         mDialog = Dialog(baseActivity)
-        val layout = LayoutInflater.from(baseActivity).inflate(R.layout.passcode_error_dialog, null, false)
+        val layout =
+            LayoutInflater.from(baseActivity).inflate(R.layout.passcode_error_dialog, null, false)
         mDialog.setContentView(layout)
         if (mEditText.length() == 0)
             mDialog.mIncorrectPasscode.text = "Please enter passcode"
@@ -130,11 +137,15 @@ class AuthFragment : BaseFragment() {
             mEditText.text = ""
             mDialog.dismiss()
         }
-        mDialog.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        mDialog.window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+        )
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()
         mDialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        mDialog.window.decorView.systemUiVisibility = baseActivity!!.window.decorView.systemUiVisibility
+        mDialog.window.decorView.systemUiVisibility =
+            baseActivity!!.window.decorView.systemUiVisibility
         mDialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
     }
 
