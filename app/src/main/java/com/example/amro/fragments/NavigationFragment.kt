@@ -1,11 +1,6 @@
 package com.example.amro.fragments
 
 
-import com.example.amro.api.LocationStats
-import com.example.amro.api.RetrofitClient
-import com.example.amro.api.TripDetails
-import com.example.amro.api.models.StandardModels.StdStatusModel
-import com.example.amro.utils.Helper
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.PointF
@@ -21,6 +16,11 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.amro.R
+import com.example.amro.api.LocationStats
+import com.example.amro.api.RetrofitClient
+import com.example.amro.api.TripDetails
+import com.example.amro.api.models.StandardModels.StdStatusModel
+import com.example.amro.utils.Helper
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -49,7 +49,11 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
 
     var control_mode = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
@@ -72,7 +76,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     }
 
     private fun animation() {
-        val anim  = AnimationUtils.loadAnimation(baseActivity, R.anim.rotate_forward)
+        val anim = AnimationUtils.loadAnimation(baseActivity, R.anim.rotate_forward)
         mLoading.startAnimation(anim)
 
     }
@@ -103,7 +107,8 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     }
 
     fun LoadMap() {
-        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map").memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
+        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map")
+            .memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
         Log.i(TAG, "Loading Image...")
 
     }
@@ -128,7 +133,10 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                 sendingGoal_inProgress = false
             }
 
-            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
+            override fun onResponse(
+                call: Call<StdStatusModel>,
+                response: Response<StdStatusModel>
+            ) {
                 Toast.makeText(baseActivity, "Goal XY Set", Toast.LENGTH_SHORT).show()
                 sendingGoal_inProgress = false
             }
@@ -196,7 +204,10 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                 MotionEvent.ACTION_MOVE ->
                     if (mode == DRAG) {
                         matrix.set(savedMatrix)
-                        matrix.postTranslate(event.x - start.x, event.y - start.y) // create the transformation in the matrix  of points
+                        matrix.postTranslate(
+                            event.x - start.x,
+                            event.y - start.y
+                        ) // create the transformation in the matrix  of points
                     } else if (mode == ZOOM) {
                         // pinch zooming
                         val newDist = spacing(event)
@@ -230,7 +241,18 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     }
 
     private fun dumpEvent(event: MotionEvent) {
-        val names = arrayOf("DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?")
+        val names = arrayOf(
+            "DOWN",
+            "UP",
+            "MOVE",
+            "CANCEL",
+            "OUTSIDE",
+            "POINTER_DOWN",
+            "POINTER_UP",
+            "7?",
+            "8?",
+            "9?"
+        )
         val sb = StringBuilder()
         val action = event.action
         val actionCode = action and MotionEvent.ACTION_MASK

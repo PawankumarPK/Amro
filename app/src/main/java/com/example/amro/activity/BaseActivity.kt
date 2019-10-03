@@ -1,9 +1,5 @@
 package com.example.amro.activity
 
-import com.example.amro.*
-import com.example.amro.adapter.FragmentsAdapter
-import com.example.amro.api.RetrofitClient
-import com.example.amro.utils.Helper
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
@@ -14,6 +10,10 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.example.amro.*
+import com.example.amro.adapter.FragmentsAdapter
+import com.example.amro.api.RetrofitClient
+import com.example.amro.utils.Helper
 import kotlinx.android.synthetic.main.activity_base.*
 
 class BaseActivity : AppCompatActivity() {
@@ -37,8 +37,8 @@ class BaseActivity : AppCompatActivity() {
 
         startKioskMode()
 
-        RetrofitClient.init(Helper.getConfigValue(this,"api_url")!!)
-        RetrofitClient.initRosAPI(Helper.getConfigValue(this,"ros_url")!!)
+        RetrofitClient.init(Helper.getConfigValue(this, "api_url")!!)
+        RetrofitClient.initRosAPI(Helper.getConfigValue(this, "ros_url")!!)
 
         pager.adapter = FragmentsAdapter(supportFragmentManager, pager)
         pager.currentItem = FragmentsAdapter.Screens.Start.ordinal
@@ -72,21 +72,28 @@ class BaseActivity : AppCompatActivity() {
 
     private fun startKioskMode() {
         mAdminComponentName = MyDeviceAdminReceiver.getComponentName(this)
-        mDevicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        mDevicePolicyManager =
+            getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
         if (mDevicePolicyManager.isDeviceOwnerApp(packageName)) {
             mDevicePolicyManager.setLockTaskPackages(mAdminComponentName, arrayOf(packageName))
             startLockTask()
             val intentFilter = IntentFilter(Intent.ACTION_MAIN)
             intentFilter.addCategory(Intent.CATEGORY_HOME)
             intentFilter.addCategory(Intent.CATEGORY_DEFAULT)
-            mDevicePolicyManager.addPersistentPreferredActivity(mAdminComponentName,
-                    intentFilter, ComponentName(packageName, BaseActivity::class.java.name))
+            mDevicePolicyManager.addPersistentPreferredActivity(
+                mAdminComponentName,
+                intentFilter, ComponentName(packageName, BaseActivity::class.java.name)
+            )
             mDevicePolicyManager.setKeyguardDisabled(mAdminComponentName, true)
-            mDevicePolicyManager.setGlobalSetting(mAdminComponentName,
-                    Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
-                    Integer.toString(BatteryManager.BATTERY_PLUGGED_AC
+            mDevicePolicyManager.setGlobalSetting(
+                mAdminComponentName,
+                Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+                Integer.toString(
+                    BatteryManager.BATTERY_PLUGGED_AC
                             or BatteryManager.BATTERY_PLUGGED_USB
-                            or BatteryManager.BATTERY_PLUGGED_WIRELESS))
+                            or BatteryManager.BATTERY_PLUGGED_WIRELESS
+                )
+            )
 
             window.decorView.systemUiVisibility = flags
 
