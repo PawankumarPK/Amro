@@ -36,6 +36,9 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     var sendingGoal_inProgress = false
     val TAG = "NavFrag"
 
+    private val handler = Handler()
+    private var runnable: Runnable? = null
+
     var matrix = Matrix()
     var savedMatrix = Matrix()
 
@@ -49,26 +52,42 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     var oldDist = 1f
 
     var control_mode = 0
+    val launchFrag = LaunchFragment()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            getBatteryData()
+
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val battery = DeviceStats.Battery
+        mMode.text = DeviceStats.DataBundle
 
 
         mMapZoom.setOnTouchListener(this)
         LoadMap()
         updateBotXY()
         loadAnimation()
-        mForward.setOnClickListener {
-            mMapZoom.visibility = View.INVISIBLE
-            mLoading.visibility = View.INVISIBLE
-        }
 
+    }
+
+    private fun getBatteryData() {
+        val battery = DeviceStats.Battery
+        mBattery.text = battery.toString()
+        Log.d("=====>>>", "$battery")
     }
 
     private fun loadAnimation() {
@@ -103,7 +122,8 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     }
 
     fun LoadMap() {
-        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map").memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
+        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map")
+            .memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
         Log.i(TAG, "Loading Image...")
 
     }
@@ -128,7 +148,10 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                 sendingGoal_inProgress = false
             }
 
-            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
+            override fun onResponse(
+                call: Call<StdStatusModel>,
+                response: Response<StdStatusModel>
+            ) {
                 Toast.makeText(baseActivity, "Goal XY Set", Toast.LENGTH_SHORT).show()
                 sendingGoal_inProgress = false
             }
@@ -195,7 +218,10 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                 MotionEvent.ACTION_MOVE ->
                     if (mode == DRAG) {
                         matrix.set(savedMatrix)
-                        matrix.postTranslate(event.x - start.x, event.y - start.y) // create the transformation in the matrix  of points
+                        matrix.postTranslate(
+                            event.x - start.x,
+                            event.y - start.y
+                        ) // create the transformation in the matrix  of points
                     } else if (mode == ZOOM) {
                         // pinch zooming
                         val newDist = spacing(event)
@@ -230,7 +256,18 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     }
 
     private fun dumpEvent(event: MotionEvent) {
-        val names = arrayOf("DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?")
+        val names = arrayOf(
+            "DOWN",
+            "UP",
+            "MOVE",
+            "CANCEL",
+            "OUTSIDE",
+            "POINTER_DOWN",
+            "POINTER_UP",
+            "7?",
+            "8?",
+            "9?"
+        )
         val sb = StringBuilder()
         val action = event.action
         val actionCode = action and MotionEvent.ACTION_MASK
@@ -254,6 +291,5 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
         sb.append("]")
         Log.d("Touch Events ---------", sb.toString())
     }
-
 
 }

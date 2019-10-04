@@ -10,20 +10,21 @@
     tools:context=".fragments.NavigationFragment">
 
     <ImageView
+        android:id="@+id/mBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_bot"
+        android:visibility="gone" />
+
+    <ImageView
         android:id="@+id/mSource"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="550dp"
         android:layout_marginBottom="100dp"
+        android:contentDescription="@null"
         android:src="@drawable/ic_source"
-        android:visibility="gone" />
-
-
-    <ImageView
-        android:id="@+id/mBot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_bot"
         android:visibility="gone" />
 
     <RelativeLayout
@@ -50,103 +51,102 @@
 
     </RelativeLayout>
 
-
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.25"
         android:orientation="vertical">
 
-
-      <!--  <Button
-            android:id="@+id/mModes"
+        <Button
+            android:id="@+id/mMode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@drawable/grey_gradients"
             android:text="Map Mode"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:textAllCaps="false"
-            android:textColor="@drawable/button_text_color"
-            android:textSize="@dimen/JBtnTextsizeTab" />
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
 
--->
-        <!--   <Button
-               android:id="@+id/moveBtn"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Move" />
 
-           <Button
-               android:id="@+id/createBtn"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Create" />
+        <!--
 
-           <Button
-               android:id="@+id/saveBtn"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Save" />
+                <Button
+                    android:id="@+id/moveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Move" />
 
-   -->
+                <Button
+                    android:id="@+id/createBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create" />
 
-        <LinearLayout
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save" />
+        -->
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/mMode"
+            android:gravity="center_vertical">
 
             <GridLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mModes"
+                android:layout_centerVertical="true"
                 android:columnCount="3"
                 android:rowCount="3">
 
 
                 <Button
                     android:id="@+id/mForward"
-                    android:layout_width="@dimen/joystickButtonsTab"
-                    android:layout_height="@dimen/joystickButtonsTab"
+                    android:layout_width="@dimen/joystickButtons"
+                    android:layout_height="@dimen/joystickButtons"
                     android:layout_row="0"
                     android:layout_column="1"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/JBtnMargin"
                     android:background="@drawable/start_button_bg_color"
                     android:text="▲"
                     android:textAllCaps="false"
                     android:textColor="@drawable/button_text_color"
-                    android:textSize="@dimen/JBtnTextsizeTab" />
+                    android:textSize="@dimen/JBtnTextsize" />
 
 
                 <Button
                     android:id="@+id/mBackward"
-                    android:layout_width="@dimen/joystickButtonsTab"
-                    android:layout_height="@dimen/joystickButtonsTab"
+                    android:layout_width="@dimen/joystickButtons"
+                    android:layout_height="@dimen/joystickButtons"
                     android:layout_row="2"
                     android:layout_column="1"
                     android:layout_margin="@dimen/JBtnMargin"
                     android:background="@drawable/start_button_bg_color"
                     android:text="▼"
                     android:textColor="@drawable/button_text_color"
-                    android:textSize="@dimen/JBtnTextsizeTab" />
+                    android:textSize="@dimen/JBtnTextsize" />
 
                 <Button
                     android:id="@+id/mLeft"
-                    android:layout_width="@dimen/joystickButtonsTab"
-                    android:layout_height="@dimen/joystickButtonsTab"
+                    android:layout_width="@dimen/joystickButtons"
+                    android:layout_height="@dimen/joystickButtons"
                     android:layout_row="1"
                     android:layout_column="0"
                     android:layout_margin="@dimen/JBtnMargin"
                     android:background="@drawable/start_button_bg_color"
                     android:text="◀"
                     android:textColor="@drawable/button_text_color"
-                    android:textSize="@dimen/JBtnTextsizeTab" />
+                    android:textSize="@dimen/JBtnTextsize" />
 
                 <Button
                     android:id="@+id/mRight"
-                    android:layout_width="@dimen/joystickButtonsTab"
-                    android:layout_height="@dimen/joystickButtonsTab"
+                    android:layout_width="@dimen/joystickButtons"
+                    android:layout_height="@dimen/joystickButtons"
                     android:layout_row="1"
                     android:layout_column="2"
                     android:layout_margin="@dimen/JBtnMargin"
@@ -154,24 +154,49 @@
                     android:gravity="center"
                     android:text="▶"
                     android:textColor="@drawable/button_text_color"
-                    android:textSize="@dimen/JBtnTextsizeTab" />
+                    android:textSize="@dimen/JBtnTextsize" />
 
 
                 <Button
                     android:id="@+id/mStop"
-                    android:layout_width="@dimen/joystickButtonsTab"
-                    android:layout_height="@dimen/joystickButtonsTab"
+                    android:layout_width="@dimen/joystickButtons"
+                    android:layout_height="@dimen/joystickButtons"
                     android:layout_row="1"
                     android:layout_column="1"
                     android:layout_margin="@dimen/JBtnMargin"
                     android:background="@drawable/start_button_bg_color"
+                    android:gravity="center"
                     android:text="⦿"
                     android:textColor="@drawable/button_text_color"
-                    android:textSize="@dimen/JBtnTextsizeTab" />
+                    android:textSize="@dimen/JBtnTextsize" />
 
             </GridLayout>
-        </LinearLayout>
 
+
+            <RelativeLayout
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/battery_background"
+                android:gravity="center"
+                android:rotation="90">
+
+                <TextView
+                    android:id="@+id/mBattery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:rotation="-90"
+                    android:text="99.8"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -180,11 +205,10 @@
         android:layout_height="wrap_content"
         android:visibility="gone">
 
-
         <ProgressBar
             android:id="@+id/mProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="355dp"
+            android:layout_width="255dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/infoMessage"
             android:layout_centerHorizontal="true"
@@ -193,13 +217,12 @@
 
         <TextView
             android:id="@+id/infoMessage"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="Loading Map"
-            android:textSize="60sp" />
-
+            android:textSize="40sp" />
 
     </RelativeLayout>
 

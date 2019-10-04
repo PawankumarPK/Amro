@@ -13,14 +13,9 @@ import kotlinx.android.synthetic.main.fragment_launch.*
 class LaunchFragment : BaseFragment() {
 
     private val TAG = "LaunchFragment"
-    private var loop = false
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_launch, container, false)
     }
 
@@ -28,19 +23,29 @@ class LaunchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
+        clicked()
 
         mMapMode.setOnClickListener {
+            clicked()
+            DeviceStats.DataBundle = "Map Mode"
             pagerRef.currentItem = FragmentsAdapter.Screens.Navigation.ordinal
+
         }
         mGoalMode.setOnClickListener {
-            val battery = DeviceStats.Battery
-            mGoalMode.text = battery.toString()
-            //pagerRef.currentItem = FragmentsAdapter.Screens.Navigation.ordinal
+            clicked()
+            DeviceStats.DataBundle = "Goal Mode"
+            pagerRef.currentItem = FragmentsAdapter.Screens.Navigation.ordinal
 
         }
+
     }
 
+    private fun clicked() {
+        if (mMapMode.isClickable)
+            DeviceStats.DataBundle = "Map Mode"
+        else if (mGoalMode.isClickable)
+            DeviceStats.DataBundle = "Goal Mode"
+    }
 
     /*
     override fun onJoystickMoved(xPercent: Float, yPercent: Float, id: Int) {

@@ -11,4 +11,6 @@ object DeviceStats {
 
     var Battery:Float = 0.0F
 
+    var DataBundle:String= ""
+
 }
