@@ -1,9 +1,9 @@
 package com.example.amro.adapter
 
-import com.example.amro.fragments.*
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
+import com.example.amro.fragments.*
 
 /**
  * Created by ajayvishnu on 24/06/19.
@@ -16,7 +16,6 @@ class FragmentsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         Navigation(NavigationFragment()),
         Launch(LaunchFragment()),
-        Joystick(JoystickFragment()),
         Battery(BatteryChgFragment()),
         Settings(SettingsFragment()),
         Trouble(TroubleFragment()),
