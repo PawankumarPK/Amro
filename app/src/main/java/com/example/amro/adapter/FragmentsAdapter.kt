@@ -15,6 +15,7 @@ class FragmentsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
 
         Navigation(NavigationFragment()),
+        Launch(LaunchFragment()),
         Joystick(JoystickFragment()),
         Battery(BatteryChgFragment()),
         Settings(SettingsFragment()),

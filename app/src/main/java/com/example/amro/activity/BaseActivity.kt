@@ -41,7 +41,7 @@ class BaseActivity : AppCompatActivity() {
         RetrofitClient.initRosAPI(Helper.getConfigValue(this, "ros_url")!!)
 
         pager.adapter = FragmentsAdapter(supportFragmentManager, pager)
-        pager.currentItem = FragmentsAdapter.Screens.Start.ordinal
+        pager.currentItem = FragmentsAdapter.Screens.Launch.ordinal
 
         receiver.setPager(pager)
 

@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.amro.R
+import com.example.amro.api.DeviceStats
 import com.example.amro.api.LocationStats
 import com.example.amro.api.RetrofitClient
 import com.example.amro.api.TripDetails
@@ -49,21 +50,20 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
 
     var control_mode = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val battery = DeviceStats.Battery
+
+
         mMapZoom.setOnTouchListener(this)
         LoadMap()
         updateBotXY()
-        animation()
+        loadAnimation()
         mForward.setOnClickListener {
             mMapZoom.visibility = View.INVISIBLE
             mLoading.visibility = View.INVISIBLE
@@ -71,11 +71,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
 
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-    }
-
-    private fun animation() {
+    private fun loadAnimation() {
         val anim = AnimationUtils.loadAnimation(baseActivity, R.anim.rotate_forward)
         mLoading.startAnimation(anim)
 
@@ -107,8 +103,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     }
 
     fun LoadMap() {
-        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map")
-            .memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
+        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map").memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
         Log.i(TAG, "Loading Image...")
 
     }
@@ -133,10 +128,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                 sendingGoal_inProgress = false
             }
 
-            override fun onResponse(
-                call: Call<StdStatusModel>,
-                response: Response<StdStatusModel>
-            ) {
+            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
                 Toast.makeText(baseActivity, "Goal XY Set", Toast.LENGTH_SHORT).show()
                 sendingGoal_inProgress = false
             }
@@ -172,7 +164,6 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
             view.scaleType = ImageView.ScaleType.MATRIX
             val scale: Float
 
-
             when (event.action and MotionEvent.ACTION_MASK) {
 
                 MotionEvent.ACTION_DOWN -> {
@@ -204,10 +195,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                 MotionEvent.ACTION_MOVE ->
                     if (mode == DRAG) {
                         matrix.set(savedMatrix)
-                        matrix.postTranslate(
-                            event.x - start.x,
-                            event.y - start.y
-                        ) // create the transformation in the matrix  of points
+                        matrix.postTranslate(event.x - start.x, event.y - start.y) // create the transformation in the matrix  of points
                     } else if (mode == ZOOM) {
                         // pinch zooming
                         val newDist = spacing(event)
@@ -222,6 +210,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
                         }
                     }
             }
+
             view.imageMatrix = matrix
         }
 
@@ -241,18 +230,7 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     }
 
     private fun dumpEvent(event: MotionEvent) {
-        val names = arrayOf(
-            "DOWN",
-            "UP",
-            "MOVE",
-            "CANCEL",
-            "OUTSIDE",
-            "POINTER_DOWN",
-            "POINTER_UP",
-            "7?",
-            "8?",
-            "9?"
-        )
+        val names = arrayOf("DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?")
         val sb = StringBuilder()
         val action = event.action
         val actionCode = action and MotionEvent.ACTION_MASK
