@@ -36,9 +36,6 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     var sendingGoal_inProgress = false
     val TAG = "NavFrag"
 
-    private val handler = Handler()
-    private var runnable: Runnable? = null
-
     var matrix = Matrix()
     var savedMatrix = Matrix()
 
@@ -52,14 +49,9 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     var oldDist = 1f
 
     var control_mode = 0
-    val launchFrag = LaunchFragment()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
@@ -74,9 +66,6 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mMode.text = DeviceStats.DataBundle
-
-
         mMapZoom.setOnTouchListener(this)
         LoadMap()
         updateBotXY()
@@ -87,7 +76,6 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     private fun getBatteryData() {
         val battery = DeviceStats.Battery
         mBattery.text = battery.toString()
-        Log.d("=====>>>", "$battery")
     }
 
     private fun loadAnimation() {

@@ -22,29 +22,15 @@ class LaunchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        clicked()
-
         mMapMode.setOnClickListener {
-            clicked()
-            DeviceStats.DataBundle = "Map Mode"
             pagerRef.currentItem = FragmentsAdapter.Screens.Navigation.ordinal
 
         }
         mGoalMode.setOnClickListener {
-            clicked()
-            DeviceStats.DataBundle = "Goal Mode"
             pagerRef.currentItem = FragmentsAdapter.Screens.Navigation.ordinal
 
         }
 
-    }
-
-    private fun clicked() {
-        if (mMapMode.isClickable)
-            DeviceStats.DataBundle = "Map Mode"
-        else if (mGoalMode.isClickable)
-            DeviceStats.DataBundle = "Goal Mode"
     }
 
     /*
