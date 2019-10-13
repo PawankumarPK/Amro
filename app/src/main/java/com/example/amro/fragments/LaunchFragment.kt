@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.amro.R
 import com.example.amro.adapter.FragmentsAdapter
-import com.example.amro.api.DeviceStats
 import kotlinx.android.synthetic.main.fragment_launch.*
 
 class LaunchFragment : BaseFragment() {
@@ -15,7 +14,11 @@ class LaunchFragment : BaseFragment() {
     private val TAG = "LaunchFragment"
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_launch, container, false)
     }
 

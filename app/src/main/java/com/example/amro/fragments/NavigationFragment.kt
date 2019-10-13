@@ -51,7 +51,11 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
     var control_mode = 0
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
