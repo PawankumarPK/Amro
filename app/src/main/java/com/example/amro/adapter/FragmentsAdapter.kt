@@ -16,7 +16,6 @@ class FragmentsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         Navigation(NavigationFragment()),
         Launch(LaunchFragment()),
-        Battery(BatteryChgFragment()),
         Settings(SettingsFragment()),
         Trouble(TroubleFragment()),
         Start(StartFragment()),
