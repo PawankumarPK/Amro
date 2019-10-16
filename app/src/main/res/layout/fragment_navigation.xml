@@ -59,8 +59,9 @@
 
 
         <RelativeLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/mRelativeLayoutBattery"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/battery_background"
             android:gravity="center"
             android:rotation="90">
@@ -74,23 +75,19 @@
                 android:gravity="center_horizontal"
                 android:rotation="-90"
                 android:text="99.8"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
 
-        <Button
+        <ImageView
             android:id="@+id/mCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="15dp"
-            android:background="@drawable/grey_gradients"
-            android:text="Back"
-            android:textAllCaps="false"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
+            android:src="@drawable/ic_home"/>
 
 
         <Button
