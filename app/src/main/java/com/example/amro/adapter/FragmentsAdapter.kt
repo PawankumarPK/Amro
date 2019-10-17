@@ -5,9 +5,6 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import com.example.amro.fragments.*
 
-/**
- * Created by ajayvishnu on 24/06/19.
- */
 
 class FragmentsAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 

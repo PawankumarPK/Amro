@@ -55,7 +55,11 @@ class NavigationFragment : BaseFragment() {
     private var mapLoader = MapLoader()
     private var fragmentIsVisible = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
@@ -141,7 +145,10 @@ class NavigationFragment : BaseFragment() {
                 goalInProgress = false
             }
 
-            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
+            override fun onResponse(
+                call: Call<StdStatusModel>,
+                response: Response<StdStatusModel>
+            ) {
                 Toast.makeText(baseActivity, "Move Direction Set", Toast.LENGTH_SHORT).show()
                 goalInProgress = false
             }
@@ -166,7 +173,10 @@ class NavigationFragment : BaseFragment() {
                 goalInProgress = false
             }
 
-            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
+            override fun onResponse(
+                call: Call<StdStatusModel>,
+                response: Response<StdStatusModel>
+            ) {
                 Toast.makeText(baseActivity, "Goal XY Set", Toast.LENGTH_SHORT).show()
                 goalInProgress = false
             }
@@ -221,7 +231,18 @@ class NavigationFragment : BaseFragment() {
         }
 
         private fun dumpEvent(event: MotionEvent) {
-            val names = arrayOf("DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?")
+            val names = arrayOf(
+                "DOWN",
+                "UP",
+                "MOVE",
+                "CANCEL",
+                "OUTSIDE",
+                "POINTER_DOWN",
+                "POINTER_UP",
+                "7?",
+                "8?",
+                "9?"
+            )
             val sb = StringBuilder()
             val action = event.action
             val actionCode = action and MotionEvent.ACTION_MASK
@@ -255,7 +276,10 @@ class NavigationFragment : BaseFragment() {
 
                 savedMatrix.mapPoints(pts)
 
-                Log.i(TAG, (pts[0] - start.x).toString() + " " + (pts[1] - start.y).toString() + " " + start.toString())
+                Log.i(
+                    TAG,
+                    (pts[0] - start.x).toString() + " " + (pts[1] - start.y).toString() + " " + start.toString()
+                )
             } else {
                 val view = v as ImageView
                 view.scaleType = ImageView.ScaleType.MATRIX
