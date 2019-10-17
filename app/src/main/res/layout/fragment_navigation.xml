@@ -9,30 +9,11 @@
     android:src="@drawable/rviz"
     tools:context=".fragments.NavigationFragment">
 
-    <ImageView
-        android:id="@+id/mBot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_bot"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/mSource"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="550dp"
-        android:layout_marginBottom="100dp"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_source"
-        android:visibility="gone" />
-
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_weight="0.75">
-
 
         <ImageView
             android:id="@+id/mLoading"
@@ -42,12 +23,30 @@
             android:contentDescription="@null"
             android:src="@drawable/custom_progress" />
 
-
         <ImageView
             android:id="@+id/mMapZoom"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/mBot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_bot"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/mSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="550dp"
+            android:layout_marginBottom="100dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_source"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -57,64 +56,94 @@
         android:layout_weight="0.25"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/mCancel"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/grey_gradients"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
 
         <RelativeLayout
-            android:id="@+id/mRelativeLayoutBattery"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/mRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:background="@drawable/battery_background"
-            android:gravity="center"
             android:rotation="90">
 
             <TextView
                 android:id="@+id/mBattery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
                 android:gravity="center_horizontal"
                 android:rotation="-90"
                 android:text="99.8"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/mCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/ic_home"/>
 
-
-        <Button
-            android:id="@+id/mMode"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/grey_gradients"
-            android:text="Set Goal"
-            android:layout_alignParentBottom="true"
-            android:textAllCaps="false"
-            android:textColor="@color/grey"
-            android:textSize="20sp" />
+            android:layout_below="@+id/mRelativeLayout"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="↕"
+                    android:gravity="center"/>
+
+                <SeekBar
+                    android:id="@+id/seekSpeedLinear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="↔"
+                    android:gravity="center"/>
+
+                <SeekBar
+                    android:id="@+id/seekSpeedAngular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"/>
+            </LinearLayout>
+
 
             <GridLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:columnCount="3"
                 android:rowCount="3">
-
 
                 <Button
                     android:id="@+id/mForward"
@@ -183,36 +212,22 @@
                     android:textSize="@dimen/JBtnTextsize" />
 
             </GridLayout>
+        </LinearLayout>
 
 
+        <Button
+            android:id="@+id/mMode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/grey_gradients"
+            android:text="Set Goal"
+            android:textAllCaps="false"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
 
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/mRelativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-
-        <ProgressBar
-            android:id="@+id/mProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="255dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/infoMessage"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:indeterminate="true" />
-
-        <TextView
-            android:id="@+id/infoMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="Loading Map"
-            android:textSize="40sp" />
 
     </RelativeLayout>
 
