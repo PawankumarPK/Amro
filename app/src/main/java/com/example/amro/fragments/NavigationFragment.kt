@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.amro.R
+import com.example.amro.adapter.FragmentsAdapter
 import com.example.amro.api.DeviceStats
 import com.example.amro.api.LocationStats
 import com.example.amro.api.RetrofitClient
@@ -31,70 +32,167 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class NavigationFragment : BaseFragment(), View.OnTouchListener {
+private const val TAG = "NavFrag"
+private const val NONE = 0
+private const val DRAG = 1
+private const val ZOOM = 2
 
-    var sendingGoal_inProgress = false
-    val TAG = "NavFrag"
 
-    var matrix = Matrix()
-    var savedMatrix = Matrix()
+class NavigationFragment : BaseFragment() {
 
-    val NONE = 0
-    val DRAG = 1
-    val ZOOM = 2
-    var mode = NONE
+    private var goalInProgress = false
 
-    var start = PointF()
-    var mid = PointF()
-    var oldDist = 1f
+    private var matrix = Matrix()
+    private var savedMatrix = Matrix()
 
-    var control_mode = 0
+    private var mode = NONE
 
+    private var start = PointF()
+    private var mid = PointF()
+    private var oldDist = 1f
+
+    private var goalRecieveMode = false
+    private var mapLoader = MapLoader()
+    private var fragmentIsVisible = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
+
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
+        fragmentIsVisible = isVisibleToUser
         if (isVisibleToUser) {
-            getBatteryData()
-
+            updateBatteryData()
+            loadMap()
+        } else {
+            mapLoader.mapLoadHandler.removeCallbacksAndMessages(null)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mMapZoom.setOnTouchListener(this)
-        LoadMap()
-        updateBotXY()
-        loadAnimation()
+        mMode.setOnClickListener {
+            modesSelect()
+        }
+        mCancel.setOnClickListener {
+            pagerRef.currentItem = FragmentsAdapter.Screens.Start.ordinal
+        }
+        mForward.setOnClickListener {
+            move("f")
+        }
+        mBackward.setOnClickListener {
+            move("b")
+        }
+        mLeft.setOnClickListener {
+            move("l")
+        }
+        mRight.setOnClickListener {
+            move("r")
+        }
+        mStop.setOnClickListener {
+            move("s")
+        }
 
+        mMapZoom.setOnTouchListener(TouchListener())
+
+        loadAnimation()
     }
 
-    private fun getBatteryData() {
-        val battery = DeviceStats.Battery
-        mBattery.text = battery.toString()
+    private fun modesSelect() {
+
+        goalRecieveMode = !goalRecieveMode
+        if (goalRecieveMode) {
+            mMode.text = "Cancel"
+        } else {
+            mMode.text = "Set Goal"
+        }
+    }
+
+    private fun updateBatteryData() {
+        val battery = DeviceStats.Battery.toString()
+        mBattery.text = battery
     }
 
     private fun loadAnimation() {
-        val anim = AnimationUtils.loadAnimation(baseActivity, R.anim.rotate_forward)
-        mLoading.startAnimation(anim)
-
+        mLoading.startAnimation(AnimationUtils.loadAnimation(baseActivity, R.anim.rotate_forward))
     }
 
-    private var target: Target = object : Target {
+    private fun loadMap() {
+        if (fragmentIsVisible) {
+            updateBatteryData()
+            updateBotXY()
+            Picasso.get()
+                .load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map")
+                .memoryPolicy(MemoryPolicy.NO_CACHE).into(mapLoader)
+            Log.i(TAG, "Loading Map...")
+        }
+    }
+
+    private fun move(direction: String) {
+        val api = RetrofitClient.rosService
+        val call = api.move(direction, seekSpeedLinear.progress, seekSpeedAngular.progress)
+
+        call.enqueue(object : Callback<StdStatusModel> {
+            override fun onFailure(call: Call<StdStatusModel>?, t: Throwable?) {
+                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                goalInProgress = false
+            }
+
+            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
+                Toast.makeText(baseActivity, "Move Direction Set", Toast.LENGTH_SHORT).show()
+                goalInProgress = false
+            }
+        })
+    }
+
+    private fun SendGoal(x: Float, y: Float) {
+
+        goalInProgress = true
+
+        val targetX: Float = x * 0.05F
+        val targetY: Float = y * 0.05F
+        mSource.x = x
+        mSource.y = y
+
+        val api = RetrofitClient.apiService
+        val call = api.setGoalXY(targetX, targetY, TripDetails.TripId)
+
+        call.enqueue(object : Callback<StdStatusModel> {
+            override fun onFailure(call: Call<StdStatusModel>?, t: Throwable?) {
+                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
+                goalInProgress = false
+            }
+
+            override fun onResponse(call: Call<StdStatusModel>, response: Response<StdStatusModel>) {
+                Toast.makeText(baseActivity, "Goal XY Set", Toast.LENGTH_SHORT).show()
+                goalInProgress = false
+            }
+        })
+    }
+
+    private fun updateBotXY() {
+        if (baseActivity != null && mBot != null) {
+            mBot.x = LocationStats.x
+            mBot.y = LocationStats.y
+        }
+    }
+
+    inner class MapLoader : Target {
+
+        var mapLoadHandler = Handler()
+
         override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-            if (bitmap != null) {
+            if (fragmentIsVisible && bitmap != null && mMapZoom != null) {
                 mMapZoom.setImageBitmap(bitmap)
                 mLoading.clearAnimation()
                 mLoading.visibility = View.GONE
+                mapLoadHandler.postDelayed({
+                    loadMap()
+                }, 2000)
             }
-
-            Handler().postDelayed({
-                LoadMap()
-            }, 2000)
         }
 
         override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -102,182 +200,107 @@ class NavigationFragment : BaseFragment(), View.OnTouchListener {
         }
 
         override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-            Handler().postDelayed({
-                LoadMap()
+            mapLoadHandler.postDelayed({
+                loadMap()
             }, 5000)
         }
-
     }
 
-    fun LoadMap() {
-        Picasso.get().load(Helper.getConfigValue(baseActivity!!, "ros_url")!! + "/map")
-            .memoryPolicy(MemoryPolicy.NO_CACHE).into(target)
-        Log.i(TAG, "Loading Image...")
+    inner class TouchListener : View.OnTouchListener {
 
-    }
+        private fun spacing(event: MotionEvent): Float {
+            val x = event.getX(0) - event.getX(1)
+            val y = event.getY(0) - event.getY(1)
+            return Math.sqrt((x * x + y * y).toDouble()).toFloat()
+        }
 
-    fun SendGoal(x: Float, y: Float) {
+        private fun midPoint(point: PointF, event: MotionEvent) {
+            val x = event.getX(0) + event.getX(1)
+            val y = event.getY(0) + event.getY(1)
+            point.set(x / 2, y / 2)
+        }
 
-        sendingGoal_inProgress = true
+        private fun dumpEvent(event: MotionEvent) {
+            val names = arrayOf("DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?")
+            val sb = StringBuilder()
+            val action = event.action
+            val actionCode = action and MotionEvent.ACTION_MASK
+            sb.append("event ACTION_").append(names[actionCode])
 
-        val api = RetrofitClient.apiService
-
-        val targetX: Float = x * 0.05F
-        val targetY: Float = y * 0.05F
-
-        mSource.x = x
-        mSource.y = y
-
-        val call = api.setGoalXY(targetX, targetY, TripDetails.TripId)
-
-        call.enqueue(object : Callback<StdStatusModel> {
-            override fun onFailure(call: Call<StdStatusModel>?, t: Throwable?) {
-                Toast.makeText(baseActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
-                sendingGoal_inProgress = false
+            if (actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP) {
+                sb.append("(pid ").append(action shr MotionEvent.ACTION_POINTER_ID_SHIFT)
+                sb.append(")")
             }
 
-            override fun onResponse(
-                call: Call<StdStatusModel>,
-                response: Response<StdStatusModel>
-            ) {
-                Toast.makeText(baseActivity, "Goal XY Set", Toast.LENGTH_SHORT).show()
-                sendingGoal_inProgress = false
+            sb.append("[")
+            for (i in 0 until event.pointerCount) {
+                sb.append("#").append(i)
+                sb.append("(pid ").append(event.getPointerId(i))
+                sb.append(")=").append(event.getX(i).toInt())
+                sb.append(",").append(event.getY(i).toInt())
+                if (i + 1 < event.pointerCount)
+                    sb.append(";")
             }
-        })
-    }
 
-    private fun updateBotXY() {
-        Thread {
-            if (baseActivity != null)
-                baseActivity!!.runOnUiThread {
-                    if (mBot != null) {
-                        mBot.x = LocationStats.x
-                        mBot.y = LocationStats.y
-                    }
-                }
+            sb.append("]")
+            Log.d("Touch Events ---------", sb.toString())
+        }
 
-            Thread.sleep(1000)
-            updateBotXY()
+        override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+            if (goalRecieveMode) {
+                val x = event!!.x
+                val y = event.y
+                //if(!goalInProgress) SendGoal(x, y)
+                val pts = floatArrayOf(event.x, event.y)
 
-        }.start()
-    }
+                savedMatrix.mapPoints(pts)
 
-    override fun onTouch(v: View, event: MotionEvent): Boolean {
-        //dumpEvent(event)
+                Log.i(TAG, (pts[0] - start.x).toString() + " " + (pts[1] - start.y).toString() + " " + start.toString())
+            } else {
+                val view = v as ImageView
+                view.scaleType = ImageView.ScaleType.MATRIX
+                val scale: Float
 
-        if (control_mode == 1) {
-            val x = event.x
-            val y = event.y
-            if (!sendingGoal_inProgress) SendGoal(x, y)
-            Log.i(TAG, "$x $y")
-        } else {
-            val view = v as ImageView
-            view.scaleType = ImageView.ScaleType.MATRIX
-            val scale: Float
-
-            when (event.action and MotionEvent.ACTION_MASK) {
-
-                MotionEvent.ACTION_DOWN -> {
-                    matrix.set(view.imageMatrix)
-                    savedMatrix.set(matrix)
-                    start.set(event.x, event.y)
-                    Log.d(TAG, "mode=DRAG") // write to LogCat
-                    mode = DRAG
-                }
-
-                MotionEvent.ACTION_UP,
-
-                MotionEvent.ACTION_POINTER_UP -> {
-                    mode = NONE
-                    Log.d(TAG, "mode=NONE")
-                }
-
-                MotionEvent.ACTION_POINTER_DOWN -> {
-                    oldDist = spacing(event)
-                    Log.d(TAG, "oldDist=$oldDist")
-                    if (oldDist > 5f) {
+                when (event!!.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_DOWN -> {
+                        matrix.set(view.imageMatrix)
                         savedMatrix.set(matrix)
-                        midPoint(mid, event)
-                        mode = ZOOM
-                        Log.d(TAG, "mode=ZOOM")
+                        start.set(event.x, event.y)
+                        mode = DRAG
                     }
-                }
 
-                MotionEvent.ACTION_MOVE ->
-                    if (mode == DRAG) {
-                        matrix.set(savedMatrix)
-                        matrix.postTranslate(
-                            event.x - start.x,
-                            event.y - start.y
-                        ) // create the transformation in the matrix  of points
-                    } else if (mode == ZOOM) {
-                        // pinch zooming
-                        val newDist = spacing(event)
-                        Log.d(TAG, "newDist=$newDist")
-                        if (newDist > 5f) {
-                            matrix.set(savedMatrix)
-                            scale = newDist / oldDist // setting the scaling of the
-                            // matrix...if scale > 1 means
-                            // zoom in...if scale < 1 means
-                            // zoom out
-                            matrix.postScale(scale, scale, mid.x, mid.y)
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> {
+                        mode = NONE
+                    }
+
+                    MotionEvent.ACTION_POINTER_DOWN -> {
+                        oldDist = spacing(event)
+                        if (oldDist > 5f) {
+                            savedMatrix.set(matrix)
+                            midPoint(mid, event)
+                            mode = ZOOM
                         }
                     }
+
+                    MotionEvent.ACTION_MOVE ->
+                        if (mode == DRAG) {
+                            matrix.set(savedMatrix)
+                            matrix.postTranslate(event.x - start.x, event.y - start.y)
+                        } else if (mode == ZOOM) {
+                            val newDist = spacing(event)
+                            if (newDist > 5f) {
+                                matrix.set(savedMatrix)
+                                scale = newDist / oldDist
+                                matrix.postScale(scale, scale, mid.x, mid.y)
+                            }
+                        }
+                }
+
+                view.imageMatrix = matrix
             }
 
-            view.imageMatrix = matrix
+            return true
         }
 
-        return true
     }
-
-    private fun spacing(event: MotionEvent): Float {
-        val x = event.getX(0) - event.getX(1)
-        val y = event.getY(0) - event.getY(1)
-        return Math.sqrt((x * x + y * y).toDouble()).toFloat()
-    }
-
-    private fun midPoint(point: PointF, event: MotionEvent) {
-        val x = event.getX(0) + event.getX(1)
-        val y = event.getY(0) + event.getY(1)
-        point.set(x / 2, y / 2)
-    }
-
-    private fun dumpEvent(event: MotionEvent) {
-        val names = arrayOf(
-            "DOWN",
-            "UP",
-            "MOVE",
-            "CANCEL",
-            "OUTSIDE",
-            "POINTER_DOWN",
-            "POINTER_UP",
-            "7?",
-            "8?",
-            "9?"
-        )
-        val sb = StringBuilder()
-        val action = event.action
-        val actionCode = action and MotionEvent.ACTION_MASK
-        sb.append("event ACTION_").append(names[actionCode])
-
-        if (actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP) {
-            sb.append("(pid ").append(action shr MotionEvent.ACTION_POINTER_ID_SHIFT)
-            sb.append(")")
-        }
-
-        sb.append("[")
-        for (i in 0 until event.pointerCount) {
-            sb.append("#").append(i)
-            sb.append("(pid ").append(event.getPointerId(i))
-            sb.append(")=").append(event.getX(i).toInt())
-            sb.append(",").append(event.getY(i).toInt())
-            if (i + 1 < event.pointerCount)
-                sb.append(";")
-        }
-
-        sb.append("]")
-        Log.d("Touch Events ---------", sb.toString())
-    }
-
 }

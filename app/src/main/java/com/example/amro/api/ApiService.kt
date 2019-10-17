@@ -60,5 +60,9 @@ interface ApiService {
     @GET("/map")
     fun getMap(): Call<RosMap>
 
+    @GET("/move")
+    fun move(@Query("direction") direction: String,  @Query("lspeed") lspeed: Int, @Query("aspeed") aspeed: Int): Call<StdStatusModel>
+
+
 
 }
