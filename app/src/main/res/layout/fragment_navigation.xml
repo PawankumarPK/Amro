@@ -102,40 +102,40 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:text="↕"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="↕" />
 
                 <SeekBar
                     android:id="@+id/seekSpeedLinear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"/>
+                    android:gravity="center" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:text="↔"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="↔" />
 
                 <SeekBar
                     android:id="@+id/seekSpeedAngular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"/>
+                    android:gravity="center" />
             </LinearLayout>
 
 

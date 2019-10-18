@@ -1,9 +1,5 @@
 package com.example.amro.fragments
 
-import com.example.amro.R
-import com.example.amro.adapter.FragmentsAdapter
-import com.example.amro.adapter.SettingsAdapter
-import com.example.amro.api.DeviceStats
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
@@ -14,6 +10,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.amro.R
+import com.example.amro.adapter.FragmentsAdapter
+import com.example.amro.adapter.SettingsAdapter
+import com.example.amro.api.DeviceStats
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -40,20 +40,24 @@ class SettingsFragment : BaseFragment() {
     }
 
     private var itemList: Map<Int, SettingItem> = mapOf<Int, SettingItem>(
-            0 to SettingItem("Server"),
-            1 to SettingItem("Core"),
-            2 to SettingItem("Database"),
-            3 to SettingItem("Arduino1"),
-            4 to SettingItem("Arduino2"),
-            5 to SettingItem("Lidar"),
-            6 to SettingItem("Battery", SettingType.Progress),
-            7 to SettingItem("Screen", SettingType.Progress),
-            8 to SettingItem("Sensors", SettingType.Progress)
+        0 to SettingItem("Server"),
+        1 to SettingItem("Core"),
+        2 to SettingItem("Database"),
+        3 to SettingItem("Arduino1"),
+        4 to SettingItem("Arduino2"),
+        5 to SettingItem("Lidar"),
+        6 to SettingItem("Battery", SettingType.Progress),
+        7 to SettingItem("Screen", SettingType.Progress),
+        8 to SettingItem("Sensors", SettingType.Progress)
     )
 
     private var adapter: SettingsAdapter = SettingsAdapter(itemList)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
